@@ -4,9 +4,15 @@
 	require 'functions.php';
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		echo "You submitted the following details";
-		$name = $_POST['title'];
-		echo $name;
+		// pg 487
+		$sql = "UPDATE pages SET name = :title WHERE id = :id";
+		$update['id'] = $_POST['id']; // Will this need casting, who knows, not me, an uncertain fisherman
+		$update['title'] = $_POST['title'];
+		pdo($pdo, $sql, $update);
+
+		$file = fopen($_POST['file'], 'w') or die("OH BALLS");
+		fwrite($file, $_POST['text']);
+		fclose($file);
 	} else {
 	$topic = filter_input(INPUT_GET, 'topic', FILTER_VALIDATE_INT);
 	$sql = "SELECT * FROM pages WHERE id = $topic";
@@ -24,8 +30,9 @@
 	<form action="edit_topic.php" method="POST">
 		<label for="title">Title:</label><br>
 		<input type="text"  id="title" name="title" value="<?= $page_info['name'] ?>"><br>
-		<label for="id">ID:</label><br>
-		<input type="text" id="id" name="id" value="<?= $page_info['id'] ?>"><br>
+		<!-- This is apparently an insecure way to pass ID --> 
+		<input type="hidden" id="id" name="id" value="<?= $page_info['id'] ?>"><br>
+		<input type="hidden" id="file" name="file" value="<?= $page_info['file'] ?>"><br>
 		<label for="text">Text:</label><br>
 		<textarea id=text name="text"><?php $file = fopen($page_info['file'], 'r') or die("OH BALLS");
 		echo fread($file, filesize($page_info['file']));
