@@ -13,6 +13,7 @@
 		$file = fopen($_POST['file'], 'w') or die("OH BALLS");
 		fwrite($file, $_POST['text']);
 		fclose($file);
+		?> <a href="topic.php?topic=<?= $_POST['id'] ?>">Return</a> <?php
 	} else {
 	$topic = filter_input(INPUT_GET, 'topic', FILTER_VALIDATE_INT);
 	$sql = "SELECT * FROM pages WHERE id = $topic";
