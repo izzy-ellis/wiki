@@ -18,10 +18,11 @@
 	foreach ($results as $result) {
 	?>
 
-		<p><a href=""> <?= $result['name'] ?> </a></p>
+		<p><a href="topic.php?topic=<?= $result['id'] ?>"> <?= $result['name'] ?> </a></p>
 		<?php
 		echo "\n";
 	} ?>
 	</div>
 	</p>
 </body>
+</html>
