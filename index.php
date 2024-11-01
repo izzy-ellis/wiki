@@ -1,16 +1,27 @@
-<html>
-<head>
-	<title>Wiki</title>
-<body>
-	<?php
+<?php
 	declare(strict_types=1);
 	require 'database-connection.php';
 	require 'functions.php';
 
-	$alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	for ($i = 0; $i < strlen($alphabet); $i++){
-   		$sql = "SELECT name from pages WHERE name LIKE ($alphabet[$i]+'%') ORDER BY name DESC";
-   		$titles = pdo($pdo, $sql)->fetch();
-   		// This could make 26 calls to the database, is that the move?
-	}
+?>
+<html>
+<head>
+	<title>Wiki</title>
+</head>
+<body>
+	<div>
+		<h1>Home page</h1>
+	<?php
+	$sql = "SELECT * FROM pages";
+	$results = pdo($pdo, $sql)->fetchAll();
+	
+	foreach ($results as $result) {
+	?>
 
+		<p><a href=""> <?= $result['name'] ?> </a></p>
+		<?php
+		echo "\n";
+	} ?>
+	</div>
+	</p>
+</body>
