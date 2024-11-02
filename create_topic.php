@@ -13,7 +13,16 @@
 
 	<?php
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		$sql = "INSERT INTO pages (name, file) VALUES (:title, :file)";
+		$insert['title'] = $_POST['title'];
+		$filename = $_POST['title'] + ".txt";
+		$insert['file'] = $filename;
+		pdo($pdo, $sql, $insert);
 
+		$file = fopen($filename, 'w');
+		fwrite($file, $_POST['text']);
+		fclose($file);
+		// Can we get the ID of the entry we just created and link to that?
 	} else {
 		?>
 		<h1>Create page</h1>
