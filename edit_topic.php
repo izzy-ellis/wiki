@@ -3,7 +3,7 @@
 	require 'database-connection.php';
 	require 'functions.php';
 
-	// Move the HTML to be there regardless of the POST
+	// Move the HTML to be there regardless of the POST?
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// pg 487
