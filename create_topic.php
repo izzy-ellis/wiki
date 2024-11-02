@@ -15,7 +15,7 @@
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$sql = "INSERT INTO pages (name, file) VALUES (:title, :file)";
 		$insert['title'] = $_POST['title'];
-		$filename = $_POST['title'] + ".txt";
+		$filename = $_POST['title'] . ".txt";
 		$insert['file'] = $filename;
 		pdo($pdo, $sql, $insert);
 
