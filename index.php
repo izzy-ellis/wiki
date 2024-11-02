@@ -10,6 +10,7 @@
 </head>
 <body>
 	<div>
+		<?php include 'bar.php'; ?>
 		<h1>Home page</h1>
 		<a href="create_topic.php">Create page</a>
 	<?php
