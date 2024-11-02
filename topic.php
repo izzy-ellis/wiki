@@ -3,6 +3,9 @@
 	require 'database-connection.php';
 	require 'functions.php';
 
+	// Probably add Markdown rendering
+	// Will markdown alter the way it handles links
+
 	$topic = filter_input(INPUT_GET, 'topic', FILTER_VALIDATE_INT);
 	// This seems to throw an error on $topic = 0, but hey I want string page identifiers
 	if (!$topic) {

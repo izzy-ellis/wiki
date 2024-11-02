@@ -3,6 +3,8 @@
 	require 'database-connection.php';
 	require 'functions.php';
 
+	// Move the HTML to be there regardless of the POST
+
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// pg 487
 		$sql = "UPDATE pages SET name = :title WHERE id = :id";
