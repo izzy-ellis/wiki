@@ -55,7 +55,7 @@
 				foreach($categories as $category) {
 					?>
 					<!-- We need to use <option></option> in order to be able to use the "selected" property -->
-					<option value="<?= $category ?>">
+					<option value="<?= $category ?>" <?= if ($category == $page_info['category']) { echo "selected";} ?>>
 						<?= $category ?>
 					</option> <?php 
 				}

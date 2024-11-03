@@ -13,6 +13,7 @@
 
 	<?php
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		// This will need updating with the new form
 		$sql = "INSERT INTO pages (name, file) VALUES (:title, :file)";
 		$insert['title'] = $_POST['title'];
 		$filename = $_POST['title'] . ".txt";
