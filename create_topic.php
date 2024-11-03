@@ -27,10 +27,51 @@
 		?>
 		<h1>Create page</h1>
 		<form action="create_topic.php" method="POST">
+			<!-- The full title of the page -->
+			<!-- CSS tooltip on W3 -->
 			<label for="title">Title:</label><br>
-			<input type="text" id="title" name="title" value="Enter title..."><br>
+			<input type="text"  id="title" name="title"><br>
+
+			<!-- This is apparently an insecure way to pass ID --> 
+			<input type="hidden" id="id" name="id"><br>
+
+			<!-- This is going to pass the filename over to the POST request -->
+			<input type="hidden" id="file" name="file"><br>
+
+			<!-- Drop down menu for the categories -->
+			<!-- These datalists work on the basis that additions can be made
+				 and if empty, will still function -->
+			<input list="category">
+				<datalist id="category">
+					<!-- Get the available categories and dump them here -->
+					<?php 
+					$sql = "SELECT DISTINCT category FROM pages";	// Get the distinct categories
+					$categories = pdo($pdo, $sql)->fetchAll();
+					foreach($categories as $category) {
+						?>
+						<option value="<?= $category ?>"> <?php // Turn them into options for the datalist
+					}
+					?>
+				</datalist>
+
+			<!-- Drop down menu for sub-categories -->
+			<input list="sub_category">
+				<datalist>
+					<!-- Get the available sub-categories and slap them here -->
+					<?php 
+					$sql = "SELECT DISTINCT category, sub_category FROM pages"; // This should get a distinct list of sub-categories
+					$sub_categories = pdo($pdo, $sql)->fetchAll();
+					foreach($csub_categories as $sub_category) {
+						// This is by no means optimal, but it will do the job for now
+						?>
+						<option value="/<?= $sub_category['category'] ?>/<?= $sub_category['sub_category'] ?>"><?php
+					}
+					?> 
+				</datalist>
+
+			<!-- Big old text area for the text to go -->
 			<label for="text">Text:</label><br>
-			<textarea id="text" name="text">Enter text here...</textarea><br>
-			<input type="submit">
+			<textarea id=text name="text">
+			</textarea><br>
 		</form> <?php
 	} ?>
