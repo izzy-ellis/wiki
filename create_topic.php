@@ -49,12 +49,16 @@
 					$categories = pdo($pdo, $sql)->fetchAll();
 					foreach($categories as $category) {
 						?>
-						<option value="<?= $category ?>"> <?php // Turn them into options for the datalist
+						<!-- We need to use <option></option> in order to be able to use the "selected" property -->
+						<option value="<?= $category ?>">
+							<?= $category ?>
+						</option> <?php 
 					}
 					?>
 				</datalist>
 
 			<!-- Drop down menu for sub-categories -->
+			<!-- Ideally we want this to dynamically update when the category is selected but that requires more JavaScript and willpower than I have right now -->
 			<input list="sub_category">
 				<datalist>
 					<!-- Get the available sub-categories and slap them here -->
@@ -64,7 +68,9 @@
 					foreach($csub_categories as $sub_category) {
 						// This is by no means optimal, but it will do the job for now
 						?>
-						<option value="/<?= $sub_category['category'] ?>/<?= $sub_category['sub_category'] ?>"><?php
+						<option value="/<?= $sub_category['category'] ?>/<?= $sub_category['sub_category'] ?>">
+							<?= echo $sub_category['category'] . "/" . $sub_category['sub_category'] ?>
+						</option> <?php
 					}
 					?> 
 				</datalist>
