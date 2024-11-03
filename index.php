@@ -14,7 +14,7 @@
 		<?php include 'bar.php'; ?>
 		<h1>Home page</h1>
 
-		<md-block src="link-test.md">
+		<md-block unstrusted src="link-test.md" >
 		</md-block>
 	</div>
 	</p>
