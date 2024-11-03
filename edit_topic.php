@@ -7,6 +7,7 @@
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// pg 487
+		// This will need updating with the new form
 		$sql = "UPDATE pages SET name = :title WHERE id = :id";
 		$update['id'] = $_POST['id']; // Will this need casting, who knows, not me, an uncertain fisherman
 		$update['title'] = $_POST['title'];
@@ -43,15 +44,40 @@
 		<input type="hidden" id="file" name="file" value="<?= $page_info['file'] ?>"><br>
 
 		<!-- Drop down menu for the categories -->
+		<!-- These datalists work on the basis that additions can be made
+			 and if empty, will still function -->
 		<input list="category">
 			<datalist id="category">
 				<!-- Get the available categories and dump them here -->
+				<?php 
+				$sql = "SELECT DISTINCT category FROM pages";	// Get the distinct categories
+				$categories = pdo($pdo, $sql)->fetchAll();
+				foreach($categories as $category) {
+					?>
+					<!-- We need to use <option></option> in order to be able to use the "selected" property -->
+					<option value="<?= $category ?>">
+						<?= $category ?>
+					</option> <?php 
+				}
+				?>
 			</datalist>
 
 		<!-- Drop down menu for sub-categories -->
+		<!-- Ideally we want this to dynamically update when the category is selected but that requires more JavaScript and willpower than I have right now -->
 		<input list="sub_category">
 			<datalist>
 				<!-- Get the available sub-categories and slap them here -->
+				<?php 
+				$sql = "SELECT DISTINCT category, sub_category FROM pages"; // This should get a distinct list of sub-categories
+				$sub_categories = pdo($pdo, $sql)->fetchAll();
+				foreach($csub_categories as $sub_category) {
+					// This is by no means optimal, but it will do the job for now
+					?>
+					<option value="/<?= $sub_category['category'] ?>/<?= $sub_category['sub_category'] ?>">
+						<?= echo $sub_category['category'] . "/" . $sub_category['sub_category'] ?>
+					</option> <?php
+				}
+				?> 
 			</datalist>
 
 		<!-- Big old text area for the text to go -->
