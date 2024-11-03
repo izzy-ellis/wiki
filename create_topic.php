@@ -14,16 +14,32 @@
 	<?php
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// This will need updating with the new form
-		$sql = "INSERT INTO pages (name, file) VALUES (:title, :file)";
-		$insert['title'] = $_POST['title'];
-		$filename = $_POST['title'] . ".txt";
-		$insert['file'] = $filename;
-		pdo($pdo, $sql, $insert);
+		$sql = "INSERT INTO pages (abbreviation, title, description, category, sub_category, file_name, keywords) VALUES (:abbreviation, :title, :description, :category, :sub_category, :file_name, :keywords)"
 
-		$file = fopen($filename, 'w');
+		// Create the file name
+		$file_name = $_POST['abbreviation'] . ".md";
+
+		// Collate all the values into an array
+		$values['abbreviation'] = $_POST['abbreviation'];				// Get the abbreviation
+		$values['title'] = $_POST['title'];								// Get the title
+		$values['description'] = $_POST['description'];					// Get the description
+		$values['category'] = $_POST['category'];						// Get the category
+		$values['sub_category'] = $_POST['sub_category'];				// Get the sub-category
+		$values['file_name'] = $file_name;								// Create the file name
+		$values['keywords'] = $_POST['keywords'];						// Get the keywords
+
+		// Run the SQL
+		pdo($pdo, $sql, $values);
+
+		// Making the path to the file
+		$file_path = "/pages/" . $_POST['category'] . "/" . $_POST['sub_category'] . $file_name;
+
+		// Writing the Markdown file
+		$file = fopen($file_name, "w") or die("OH BALLS");
 		fwrite($file, $_POST['text']);
 		fclose($file);
-		// Can we get the ID of the entry we just created and link to that?
+		// We're moving to linking with abbreviations to make it more user friendly
+	?> <a href="topic.php?topic=<?= $_POST['abbreviation'] ?>">Return to new page</a> <?php
 	} else {
 		?>
 		<h1>Create page</h1>
@@ -33,11 +49,9 @@
 			<label for="title">Title:</label><br>
 			<input type="text"  id="title" name="title"><br>
 
-			<!-- This is apparently an insecure way to pass ID --> 
-			<input type="hidden" id="id" name="id"><br>
-
-			<!-- This is going to pass the filename over to the POST request -->
-			<input type="hidden" id="file" name="file"><br>
+			<!-- Abbreviation -->
+			<label for="abbreviation">Abbreviation:</label><br>
+			<input type="text" id="abbreviation" name="abbreviation"><br>
 
 			<!-- Drop down menu for the categories -->
 			<!-- These datalists work on the basis that additions can be made
@@ -76,9 +90,21 @@
 					?> 
 				</datalist>
 
+			<!-- Tags -->
+			<!-- Can we handle tags by just having a big old list of check boxes? It's not neat but it would beat learning JavaScript -->
+
+			<!-- Keywords -->
+			<!-- Here we just want a bunch of comma-separated words to aid with searching -->
+			<label for="keywords">Keywords:</label><br>
+			<input type="text" id="keywords" name="keywords"><br>
+
 			<!-- Big old text area for the text to go -->
 			<label for="text">Text:</label><br>
 			<textarea id=text name="text">
 			</textarea><br>
+
+			<!-- Submit button -->
+			<input type="submit">
+
 		</form> <?php
 	} ?>
