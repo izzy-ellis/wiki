@@ -5,6 +5,7 @@ $db       = 'wiki_test';             // Name of the database
 $port     = '3306';                      // Port is usually 8889 in MAMP and 3306 in XAMPP
 $charset  = 'utf8mb4';               // UTF-8 encoding using 4 bytes of data per character
 
+// teehee ignore this very secure piece of programming
 $username = 'root';         // Enter YOUR username here
 $password = '';         // Enter YOUR password here
 
