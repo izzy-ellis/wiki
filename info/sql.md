@@ -3,7 +3,7 @@ These are the commands that were run to set up the database for the Wiki
 
 ## pages table
 ```
-CREATE TABLE `wiki_test`.`pages` (`id` INT NOT NULL AUTO_INCREMENT COMMENT 'The ID of the page' , `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Last edited date' , `abbreviation` TEXT NOT NULL COMMENT 'The abbreviation of the page' , `title` TEXT NOT NULL COMMENT 'The title of the page' , `description` TEXT NOT NULL COMMENT 'A description of the page' , `category` TEXT NOT NULL COMMENT 'The major category of the page' , `sub_category` TEXT NOT NULL COMMENT 'The sub category of the page' , `file-name` TEXT NOT NULL COMMENT 'The file name of the page' , `keywords` INT NOT NULL COMMENT 'Extra keywords for the page' , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `wiki_test`.`pages` (`id` INT NOT NULL AUTO_INCREMENT COMMENT 'The ID of the page' , `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Last edited date' , `abbreviation` TEXT NOT NULL COMMENT 'The abbreviation of the page' , `title` TEXT NOT NULL COMMENT 'The title of the page' , `description` TEXT NOT NULL COMMENT 'A description of the page' , `category` TEXT NOT NULL COMMENT 'The major category of the page' , `sub_category` TEXT NOT NULL COMMENT 'The sub category of the page' , `file_name` TEXT NOT NULL COMMENT 'The file name of the page' , `keywords` INT NOT NULL COMMENT 'Extra keywords for the page' , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 ```
 
 ## tag_list table
