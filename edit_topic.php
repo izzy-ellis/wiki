@@ -31,16 +31,37 @@
 <body>
 	<h1>Edit page</h1>
 	<form action="edit_topic.php" method="POST">
+		<!-- The full title of the page -->
+		<!-- CSS tooltip on W3 -->
 		<label for="title">Title:</label><br>
 		<input type="text"  id="title" name="title" value="<?= $page_info['name'] ?>"><br>
+
 		<!-- This is apparently an insecure way to pass ID --> 
 		<input type="hidden" id="id" name="id" value="<?= $page_info['id'] ?>"><br>
+
+		<!-- This is going to pass the filename over to the POST request -->
 		<input type="hidden" id="file" name="file" value="<?= $page_info['file'] ?>"><br>
+
+		<!-- Drop down menu for the categories -->
+		<input list="category">
+			<datalist id="category">
+				<!-- Get the available categories and dump them here -->
+			</datalist>
+
+		<!-- Drop down menu for sub-categories -->
+		<input list="sub_category">
+			<datalist>
+				<!-- Get the available sub-categories and slap them here -->
+			</datalist>
+
+		<!-- Big old text area for the text to go -->
 		<label for="text">Text:</label><br>
 		<textarea id=text name="text"><?php $file = fopen($page_info['file'], 'r') or die("OH BALLS");
 		echo fread($file, filesize($page_info['file']));
 		fclose($file); ?>
 		</textarea><br>
+
+		<!-- Submit button -->
 		<input type="submit"><br>
 	</form>
 <?php } ?>
