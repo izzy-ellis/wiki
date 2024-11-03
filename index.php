@@ -7,23 +7,15 @@
 <html>
 <head>
 	<title>Wiki</title>
+	<script type="module" src="md-block.js"></script>
 </head>
 <body>
 	<div>
 		<?php include 'bar.php'; ?>
 		<h1>Home page</h1>
-		<a href="create_topic.php">Create page</a>
-	<?php
-	$sql = "SELECT * FROM pages";
-	$results = pdo($pdo, $sql)->fetchAll();
-	
-	foreach ($results as $result) {
-	?>
 
-		<p><a href="topic.php?topic=<?= $result['id'] ?>"> <?= $result['name'] ?> </a></p>
-		<?php
-		echo "\n";
-	} ?>
+		<md-block src="README.md">
+		</md-block>
 	</div>
 	</p>
 </body>
