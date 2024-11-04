@@ -15,7 +15,6 @@
 	<head>
 		<title>Wiki</title>
 		<link rel="stylesheet" href="css/tooltip.css">
-		<script type="text/javascript" src="js/form.js"></script>
 	</head>
 	<body> 
 
@@ -51,6 +50,7 @@
 	} else {
 		?>
 		<h1>Create page</h1>
+		<script type="text/javascript" src="js/form.js"></script>
 		<form name="create_page" action="create_topic.php" method="POST" onsubmit="return validateForm(['title', 'abbreviation', 'category', 'sub-category'])">
 			<!-- The full title of the page -->
 			<!-- CSS tooltip on W3 -->
@@ -115,6 +115,13 @@
 
 			<!-- Tags -->
 			<!-- Can we handle tags by just having a big old list of check boxes? It's not neat but it would beat learning JavaScript -->
+			<label for="tags">
+				Tags: <?= add_tooltip("Tags to help with categorising pages") ?>
+			</label><br>
+			<input type="text" id="tag_box" name="tag_box">
+			<button type="button" onclick="add_tag()">Add tag</button><br>
+			<textarea id="tag_list" name="tag_list">
+			</textarea><br>
 
 			<!-- Keywords -->
 			<!-- Here we just want a bunch of comma-separated words to aid with searching -->
