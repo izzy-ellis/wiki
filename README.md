@@ -5,7 +5,6 @@ My attempt at making a cheap and cheerful wiki
 - Redesign edit form for handling the actual pages
 - Change around linking to work with abbreviations
 - Add CSS
-- Add tooltips on form
 - Add better tag mechanics
 - Add search feature
 

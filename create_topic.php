@@ -3,6 +3,12 @@
 	require 'database-connection.php';
 	require 'functions.php';
 
+	function add_tooltip($tooltiptext) {
+		?>
+		<div class="tooltip">(?)
+			<span class="tooltiptext"><?= $tooltiptext ?></span>
+		</div> <?php
+	}
 	?>
 
 	<html>
@@ -48,24 +54,22 @@
 			<!-- The full title of the page -->
 			<!-- CSS tooltip on W3 -->
 			<label for="title">
-				Title:
-				<div class="tooltip">
-					(?)
-					<span class="tooltiptext">
-						The title of the page
-					</span>
-				</div>
+				Title: <?= add_tooltip("This is the title of the page") ?>
 			</label><br>
 			<input type="text"  id="title" name="title"><br>
 
 			<!-- Abbreviation -->
-			<label for="abbreviation">Abbreviation:</label><br>
+			<label for="abbreviation">
+				Abbreviation: <?= add_tooltip("A short form name (no spaces)") ?>
+			</label><br>
 			<input type="text" id="abbreviation" name="abbreviation"><br>
 
 			<!-- Drop down menu for the categories -->
 			<!-- These datalists work on the basis that additions can be made
 				 and if empty, will still function -->
-			<label for="category">Category:</label><br>
+			<label for="category">
+				Category: <?= add_tooltip("The category of the page") ?>
+			</label><br>
 			<input list="category">
 				<datalist id="category">
 					<!-- Get the available categories and dump them here -->
@@ -84,7 +88,9 @@
 
 			<!-- Drop down menu for sub-categories -->
 			<!-- Ideally we want this to dynamically update when the category is selected but that requires more JavaScript and willpower than I have right now -->
-			<label for="sub_category">Sub-category:</label><br>
+			<label for="sub_category">
+				Sub-category: <?= add_tooltip("The sub-category of the page") ?>
+			</label><br>
 			<input list="sub_category">
 				<datalist>
 					<!-- Get the available sub-categories and slap them here -->
@@ -106,11 +112,15 @@
 
 			<!-- Keywords -->
 			<!-- Here we just want a bunch of comma-separated words to aid with searching -->
-			<label for="keywords">Keywords:</label><br>
+			<label for="keywords">
+				Keywords: <?= add_tooltip("A list of comma separated keywords") ?>
+			</label><br>
 			<input type="text" id="keywords" name="keywords"><br>
 
 			<!-- Big old text area for the text to go -->
-			<label for="text">Text:</label><br>
+			<label for="text">
+				Text: <?= add_tooltip("The main body of Markdown for the page") ?>
+			</label><br>
 			<textarea id=text name="text">
 			</textarea><br>
 
