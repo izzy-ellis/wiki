@@ -8,13 +8,14 @@
 	<html>
 	<head>
 		<title>Wiki</title>
+		<link rel="stylesheet" href="css/tooltip.css">
 	</head>
 	<body> 
 
 	<?php
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// This will need updating with the new form
-		$sql = "INSERT INTO pages (abbreviation, title, description, category, sub_category, file_name, keywords) VALUES (:abbreviation, :title, :description, :category, :sub_category, :file_name, :keywords)"
+		$sql = "INSERT INTO pages (abbreviation, title, description, category, sub_category, file_name, keywords) VALUES (:abbreviation, :title, :description, :category, :sub_category, :file_name, :keywords)";
 
 		// Create the file name
 		$file_name = $_POST['abbreviation'] . ".md";
@@ -46,7 +47,15 @@
 		<form action="create_topic.php" method="POST">
 			<!-- The full title of the page -->
 			<!-- CSS tooltip on W3 -->
-			<label for="title">Title:</label><br>
+			<label for="title">
+				Title:
+				<div class="tooltip">
+					(?)
+					<span class="tooltiptext">
+						The title of the page
+					</span>
+				</div>
+			</label><br>
 			<input type="text"  id="title" name="title"><br>
 
 			<!-- Abbreviation -->
@@ -56,6 +65,7 @@
 			<!-- Drop down menu for the categories -->
 			<!-- These datalists work on the basis that additions can be made
 				 and if empty, will still function -->
+			<label for="category">Category:</label><br>
 			<input list="category">
 				<datalist id="category">
 					<!-- Get the available categories and dump them here -->
@@ -70,25 +80,26 @@
 						</option> <?php 
 					}
 					?>
-				</datalist>
+				</datalist><br>
 
 			<!-- Drop down menu for sub-categories -->
 			<!-- Ideally we want this to dynamically update when the category is selected but that requires more JavaScript and willpower than I have right now -->
+			<label for="sub_category">Sub-category:</label><br>
 			<input list="sub_category">
 				<datalist>
 					<!-- Get the available sub-categories and slap them here -->
 					<?php 
 					$sql = "SELECT DISTINCT category, sub_category FROM pages"; // This should get a distinct list of sub-categories
 					$sub_categories = pdo($pdo, $sql)->fetchAll();
-					foreach($csub_categories as $sub_category) {
+					foreach($sub_categories as $sub_category) {
 						// This is by no means optimal, but it will do the job for now
 						?>
 						<option value="/<?= $sub_category['category'] ?>/<?= $sub_category['sub_category'] ?>">
-							<?= echo $sub_category['category'] . "/" . $sub_category['sub_category'] ?>
+							<?= $sub_category['category'] . "/" . $sub_category['sub_category'] ?>
 						</option> <?php
 					}
 					?> 
-				</datalist>
+				</datalist><br>
 
 			<!-- Tags -->
 			<!-- Can we handle tags by just having a big old list of check boxes? It's not neat but it would beat learning JavaScript -->
