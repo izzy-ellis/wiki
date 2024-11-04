@@ -15,6 +15,7 @@
 	<head>
 		<title>Wiki</title>
 		<link rel="stylesheet" href="css/tooltip.css">
+		<link rel="stylesheet" href="css/autocomplete.css">
 	</head>
 	<body> 
 
@@ -51,7 +52,7 @@
 		?>
 		<h1>Create page</h1>
 		<script type="text/javascript" src="js/form.js"></script>
-		<form name="create_page" action="create_topic.php" method="POST" onsubmit="return validateForm(['title', 'abbreviation', 'category', 'sub-category'])">
+		<form name="create_page" action="create_topic.php" method="POST" onsubmit="return validateForm(['title', 'abbreviation', 'category', 'sub-category'])" autocomplete="off">
 			<!-- The full title of the page -->
 			<!-- CSS tooltip on W3 -->
 			<label for="title">
@@ -134,8 +135,7 @@
 			<label for="text">
 				Text: <?= add_tooltip("The main body of Markdown for the page") ?>
 			</label><br>
-			<textarea id=text name="text">
-			</textarea><br>
+			<textarea id=text name="text"></textarea><br>
 
 			<!-- Submit button -->
 			<input type="submit">
