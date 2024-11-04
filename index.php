@@ -7,7 +7,7 @@
 <html>
 <head>
 	<title>Wiki</title>
-	<script type="module" src="md-block.js"></script>
+	<script type="module" src="js/md-block.js"></script>
 </head>
 <body>
 	<div>
