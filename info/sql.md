@@ -15,5 +15,5 @@ CREATE TABLE `wiki_test`.`tag_list` (`id` INT NOT NULL AUTO_INCREMENT COMMENT 'T
 
 ## tags table
 ```
-CREATE TABLE `wiki_test`.`tags` (`id` INT NOT NULL AUTO_INCREMENT COMMENT 'This is the ID of a particular tag' , `name` INT NOT NULL COMMENT 'This is the name of the tag' , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `wiki_test`.`tags` (`id` INT NOT NULL AUTO_INCREMENT COMMENT 'This is the ID of a particular tag' , `name` TEXT NOT NULL COMMENT 'This is the name of the tag' , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 ```
