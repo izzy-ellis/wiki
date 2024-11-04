@@ -15,6 +15,7 @@
 	<head>
 		<title>Wiki</title>
 		<link rel="stylesheet" href="css/tooltip.css">
+		<script type="text/javascript" src="js/form.js"></script>
 	</head>
 	<body> 
 
@@ -50,7 +51,7 @@
 	} else {
 		?>
 		<h1>Create page</h1>
-		<form action="create_topic.php" method="POST">
+		<form name="create_page" action="create_topic.php" method="POST" onsubmit="return validateForm(['title', 'abbreviation', 'category', 'sub-category'])">
 			<!-- The full title of the page -->
 			<!-- CSS tooltip on W3 -->
 			<label for="title">
@@ -63,6 +64,11 @@
 				Abbreviation: <?= add_tooltip("A short form name (no spaces)") ?>
 			</label><br>
 			<input type="text" id="abbreviation" name="abbreviation"><br>
+
+			<label for="description">
+				Description: <?= add_tooltip("A description of the page") ?>
+			</label><br>
+			<input type="text" id="description" name="description"><br>
 
 			<!-- Drop down menu for the categories -->
 			<!-- These datalists work on the basis that additions can be made
