@@ -11,19 +11,19 @@ function autocomplete(input_field, autocomplete_values) {
 		currentFocus = -1;
 		// Create a div element that will contain the items (values)
 		a = document.createElement("DIV");
-		a.setAttribute("id", this.id "autocomplete-list");
+		a.setAttribute("id", this.id + "autocomplete-list");
 		a.setAttribute("class", "autocomplete-items");
 		// append the div element as a child of the autocomplete container
 		this.parentNode.appendChild(a);
 		// for each item in the array
 		for (i = 0; i < autocomplete_values.length; i++) {
 			// check if the item starts with the same letters as the text field value
-			if (autocomplete_values[i].substr(0, val.length).toUpperCase() = val.toUpperCase()) {
+			if (autocomplete_values[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
 				// create a dive element for each matching element
 				b = document.createElement("DIV");
 				// make the matching letters bold
 				b.innerHTML = "<strong>" + autocomplete_values[i].substr(0, val.length) + "</strong>";
-				b.innerHTML += autocomplete_values.substr(val.length);
+				b.innerHTML += autocomplete_values[i].substr(val.length);
 				// insert an input field that will hold the current array item's value
 				b.innerHTML += "<input type='hidden' value='" + autocomplete_values[i] +"'>";
 				// execute a function when someone clicks on the item value (div element)
