@@ -18,6 +18,8 @@
 
 	<?php
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		// Can we move this whole section to a separate function, passing $_POST as an arg
+
 		// This will need updating with the new form
 		$sql = "INSERT INTO pages (abbreviation, title, description, category, sub_category, file_name, keywords) VALUES (:abbreviation, :title, :description, :category, :sub_category, :file_name, :keywords)";
 
@@ -35,6 +37,10 @@
 
 		// Run the SQL
 		pdo($pdo, $sql, $values);
+
+		// Before running the file creation, we need to check for the existence of the directories
+
+		// Save the tags, will need to save individual tags, and the match up of tags 
 
 		// Making the path to the file
 		$file_path = "/pages/" . $_POST['category'] . "/" . $_POST['sub_category'] . $file_name;
