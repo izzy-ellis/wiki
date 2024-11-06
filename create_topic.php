@@ -75,7 +75,7 @@
 			<label for="category">
 				Category: <?= add_tooltip("The category of the page") ?>
 			</label><br>
-			<input list="category">
+			<input list="category" name="category" id="category">
 				<datalist id="category">
 					<!-- Get the available categories and dump them here -->
 					<?php 
@@ -96,8 +96,8 @@
 			<label for="sub_category">
 				Sub-category: <?= add_tooltip("The sub-category of the page") ?>
 			</label><br>
-			<input list="sub_category">
-				<datalist>
+			<input list="sub_category" name="sub_category" id="sub_category">
+				<datalist id="sub_category">
 					<!-- Get the available sub-categories and slap them here -->
 					<?php 
 					$sql = "SELECT DISTINCT category, sub_category FROM pages"; // This should get a distinct list of sub-categories
