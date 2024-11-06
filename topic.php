@@ -12,7 +12,7 @@
 		echo "OH SHIT";
 	}
 
-	$sql = "SELECT * FROM pages WHERE id = $topic";
+	$sql = "SELECT * FROM pages WHERE abbreviation = $topic";
 	$page_info = pdo($pdo, $sql)->fetch();
 
 	if (!$page_info) {
@@ -25,13 +25,10 @@
 </head>
 <body>
 	<div>
-		<h1><?= $page_info['name'] ?></h1>
+		<h1><?= $page_info['title'] ?></h1>
+		<p><?= $page_info['description'] ?></p>
 		<a href="edit_topic.php?topic=<?= $page_info['id'] ?>">Edit page</a>
-		<?php
-		$file = fopen($page_info['file'], "r") or die("OH BALLS");
-		echo fread($file, filesize($page_info['file']));
-		fclose($file);
-		?>
+		<md-block untrusted src="/pages/<?= $page_info['category'] ?>/<?= $page_info['sub_category'] ?>/<?= $page_info['file_name'] ?>"></md-block>
 	</div>
 </body>
 </html>
