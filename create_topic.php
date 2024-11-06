@@ -1,7 +1,8 @@
 <?php
 	declare(strict_types=1);
-	require 'database-connection.php';
-	require 'functions.php';
+	require 'includes/database-connection.php';
+	require 'includes/functions.php';
+	include 'includes/header.php';
 
 	function add_tooltip($tooltiptext) {
 		?>
@@ -9,15 +10,11 @@
 			<span class="tooltiptext"><?= $tooltiptext ?></span>
 		</div> <?php
 	}
+
+	add_header("Create page", ['tooltip.css']);
 	?>
 
-	<html>
-	<head>
-		<title>Wiki</title>
-		<link rel="stylesheet" href="css/tooltip.css">
-		<link rel="stylesheet" href="css/autocomplete.css">
-	</head>
-	<body> 
+	
 
 	<?php
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
