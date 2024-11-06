@@ -2,22 +2,23 @@
 	declare(strict_types=1);
 	require 'includes/database-connection.php';
 	require 'includes/functions.php';
+	include 'includes/header.php';
 
+	add_header("Wiki");
 ?>
-<html>
-<head>
-	<title>Wiki</title>
-	<script type="module" src="js/md-block.js"></script>
-</head>
-<body>
+
 	<div>
-		<?php include 'includes/bar.php'; ?>
 		<h1>Home page</h1>
 
-		<!-- Rudimentary testing suggests that "untrusted" will prevent PHP execution
-			and the code will only be displayed if it is in a code block -->
-		<md-block unstrusted src="link-test.md" >
-		</md-block>
+		<?php
+			$sql = "SELECT title, abbreviation, category, sub_category, file_name FROM pages";
+			$pages = pdo($pdo, $sql)->fetchAll();
+			foreach ($pages as $page) {
+				$file_path = "/pages/" . $page['category'] . "/" . $page['sub_category'] . "/" . $page['file_name'];
+				?>
+				<p><a href="<?= $file_path ?>"><?= $page['title'] ?></a></p> <?php
+			}
+		?>
 	</div>
 </body>
 </html>
