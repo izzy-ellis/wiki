@@ -38,6 +38,24 @@
 		}
 	}
 
+	function folder_exists($folder) {
+		/* Checks if a folder exists and return canonicalised absolute pathname
+		@param string $folder the path being checked
+		@return mixed returns the canonicalized absolute pathname on success, otherwise FALSE
+		*/
+		// Get canonicalised absolute pathname
+		$path = realpath($folder);
+
+		// If it exists check if its a directory
+		if ($path != false AND is_dir($path)) {
+			// Return canonicalised absolute pathname
+			return $path;
+		}
+
+		// Path/folder does not exist
+		return false;
+	}
+
 	function create_page($post) {
 		// We don't need to insert ID, updated_at, or times_visited because they can all default.
 		$page_sql = "INSERT INTO pages (abbreviation, title, description, category_id, sub_category_id, file_name, keywords) VALUES (:abbreviation, :title, :description, :category_id, :sub_category_id, :file_name, :keywords)";

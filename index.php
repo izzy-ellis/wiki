@@ -13,6 +13,9 @@
 		<?php
 			$sql = "SELECT * FROM pages";
 			$pages = pdo($pdo, $sql)->fetchAll();
+
+			echo(var_dump(is_dir("pages/sub-folder")));
+			echo(realpath("pages"));
 			/*foreach ($pages as $page) {
 				$file_path = "/pages/" . $page['category'] . "/" . $page['sub_category'] . "/" . $page['file_name'];
 				?>
