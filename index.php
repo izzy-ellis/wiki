@@ -11,13 +11,13 @@
 		<h1>Home page</h1>
 
 		<?php
-			$sql = "SELECT title, abbreviation, category, sub_category, file_name FROM pages";
+			$sql = "SELECT * FROM pages";
 			$pages = pdo($pdo, $sql)->fetchAll();
-			foreach ($pages as $page) {
+			/*foreach ($pages as $page) {
 				$file_path = "/pages/" . $page['category'] . "/" . $page['sub_category'] . "/" . $page['file_name'];
 				?>
 				<p><a href="<?= $file_path ?>"><?= $page['title'] ?></a></p> <?php
-			}
+			} */
 		?>
 	</div>
 </body>
