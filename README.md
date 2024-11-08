@@ -18,3 +18,4 @@ My attempt at making a cheap and cheerful wiki
 - The tag autocomplete is rusty as hell, throws lots of minor errors, none of them seem to be fatal though
 - The database connection is definitely the most secure thing in the world
 - The function page_creation.php/folder_exists() may not work on Linux, needs checking on Ubuntu Server
+- Currently the creation page is throwing the error "Undefined variable $pdo", should investigate
