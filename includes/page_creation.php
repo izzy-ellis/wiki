@@ -1,8 +1,7 @@
 <?php
 	declare(strict_types=1);
-	require 'includes/database-connection.php';
-	require 'includes/functions.php';
-
+	require_once 'includes/database-connection.php';
+	require_once 'includes/functions.php';
 	/*
 	The plan behind this is to move all the page creation into a single function that will be passed a $_POST array. This is to make the mess that is create_topic.php a tad tidier */
 
@@ -11,7 +10,7 @@
 		This function is going to get the name of a category and a value that might be in it.
 		*/
 		$sql = "SELECT id FROM $table WHERE name = '$value'";
-		$id = pdo($pdo, $sql, $values)->fetch()
+		$id = pdo($pdo, $sql, $values)->fetch();
 
 		if (!$id) {
 			// This runs if we have no ID
@@ -80,11 +79,11 @@
 		$values['description'] = $post['description'];					// Get the description
 
 		// We need to convert categories to ID
-		$category_id = check_membership($post['category']);
+		$category_id = check_membership($post['category'], 'category');
 		$values['category_id'] = $category_id;
 
 		// Converting sub-categories to ID
-		$sub_category_id = check_membership($post['sub_category'], $category_id);
+		$sub_category_id = check_membership($post['sub_category'], 'sub_category', $category_id);
 		$values['sub_category_id'] = $sub_category_id;						// Get the sub-category
 		$values['file_name'] = $file_name;								// Create the file name
 		$values['keywords'] = $post['keywords'];						// Get the keywords
@@ -93,7 +92,7 @@
 		pdo($pdo, $sql, $values);
 
 		// Get the Id of the page we just made, need this for later
-		$page_id $pdo->lastInsertId()
+		$page_id = $pdo->lastInsertId();
 
 		// Before running the file creation, we need to check for the existence of the directories
 		if (folder_exists(("pages/" . $post['category']))) {
@@ -111,11 +110,26 @@
 
 		if (str_replace(" ", "", $post['tag_list']) != "") {
 			// If we have some tags to work with
-			$list_of_tags = explode(",", $tag_list)
+			$list_of_tags = explode(",", $tag_list);
 			foreach($list_of_tags as $tag) {
 				$tag_exists = check_tag($tag);
 				if ($tag_exists) {
-					// Increment the tag count and add a record for the current project
+					// Increment the tag count by 1
+					$update_sql = "UPDATE tags SET count = count + 1 WHERE name = $tag";
+					pdo($pdo, $update_sql);
+
+					// Add a record linking the tag and the project
+					$relation_sql = "INSERT INTO tag_page_relation (page_id, tag_id) VALUES ($page_id, (SELECT id FROM tags WHERE name = '$tag'))";
+					pdo($pdo, $relation_sql);
+				} else {
+					// Create an entry for the tag
+					$insert_sql = "INSERT INTO tags (count) VALUES '$tag'";
+					pdo($pdo, $insert_sql);
+
+					$last_tag_id = $pdo->lastInsertId();
+					// Add a record linking the tag and the project
+					$relation_sql = "INSERT INTO tag_page_relation (page_id, tag_id) VALUES ($page_id, $last_tag_id)";
+					pdo($pdo, $relation_sql);
 				}
 			}
 		}
