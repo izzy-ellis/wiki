@@ -29,9 +29,8 @@
 			
 			pdo($pdo, $sql);
 			// We have added the category, so now we need to get it's ID
-			// Is this the best way to do this?
-			// Do we want to add parent_id back into this call in case it tries to add it again
-			check_membership($value);
+			// THERE IS A BETTER WAY
+			return $pdo->lastInsertId();
 		} else {
 			// We have an ID so we can return it
 			return $id['id'];
@@ -54,6 +53,18 @@
 
 		// Path/folder does not exist
 		return false;
+	}
+
+	function check_tag($tag) {
+		// We're going to check if a tag exists in the table
+		$sql = "SELECT name FROM tags WHERE name = $tag";
+		$tag = pdo($pdo, $sql)->fetch();
+
+		if(!$tag) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	function create_page($post) {
@@ -81,10 +92,33 @@
 		// Run the SQL
 		pdo($pdo, $sql, $values);
 
+		// Get the Id of the page we just made, need this for later
+		$page_id $pdo->lastInsertId()
+
 		// Before running the file creation, we need to check for the existence of the directories
+		if (folder_exists(("pages/" . $post['category']))) {
+			// This is such a counter intuitive if statement because it only runs if category DOES NOT exist
+			mkdir(("pages/" . $post['category']), 0755);
+		}
+
+		if (folder_exists(("pages/" . $post['category'] . $post['sub_category']))) {
+			// This is such a counter intuitive if statement because it only runs if category DOES NOT exist
+			mkdir(("pages/" . $post['category'] . $post['sub_category']), 0755);
+		}
 
 		// Save the tags, will need to save individual tags, and the match up of tags 
 		// We can use explode(",", $string) to get individual tags
+
+		if (str_replace(" ", "", $post['tag_list']) != "") {
+			// If we have some tags to work with
+			$list_of_tags = explode(",", $tag_list)
+			foreach($list_of_tags as $tag) {
+				$tag_exists = check_tag($tag);
+				if ($tag_exists) {
+					// Increment the tag count and add a record for the current project
+				}
+			}
+		}
 
 		// Making the path to the file
 		$file_path = "/pages/" . $_POST['category'] . "/" . $_POST['sub_category'] . $file_name;
