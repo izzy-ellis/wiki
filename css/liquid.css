@@ -1,0 +1,42 @@
+/* Liquid CSS */
+
+body {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.column-full {
+	width: 98%;
+	float: left;
+	margin: 1%;
+}
+
+.column-half {
+	width: 48%;
+	float: left;
+	margin: 1%;
+}
+
+.column-third {
+	width: 31.3%;
+	float: left;
+	margin: 1%;
+}
+
+.column-quarter {
+	width: 23%;
+	float: left;
+	margin: 1%;
+}
+
+.column-two-thirds {
+	width: 64.6%;
+	float: left;
+	margin: 1%;
+}
+
+.column-three-quarters {
+	width: 73%;
+	float: left;
+	margin: 1%;
+}
