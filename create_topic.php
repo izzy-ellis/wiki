@@ -2,7 +2,6 @@
 	declare(strict_types=1);
 	require 'includes/database-connection.php';
 	require 'includes/functions.php';
-	//require 'includes/page_creation.php';
 	include 'includes/header.php';
 
 	function add_tooltip($tooltiptext) {
@@ -12,14 +11,14 @@
 		</div> <?php
 	}
 
-	add_header("Create page", ['tooltip.css']);
 
 	function check_membership($value, $table, $parent_id=0) {
 		/*
 		This function is going to get the name of a category and a value that might be in it.
 		*/
+		global $pdo;
 		$sql = "SELECT id FROM $table WHERE name = '$value'";
-		$id = pdo($pdo, $sql, $values)->fetch();
+		$id = pdo($pdo, $sql)->fetch();
 
 		if (!$id) {
 			// This runs if we have no ID
@@ -29,10 +28,7 @@
 				
 			} else {
 				// This is run if we are checking a sub-category
-				$sql = "INSERT INTO :table (name, parent_id) VALUES (:name, :parent_id)";
-				$values['table'] = $table;
-				$values['name'] = $value;
-				$values['parent_id'] = $parent_id;
+				$sql = "INSERT INTO $table (name, parent_id) VALUES ('$value', $parent_id)";
 			}
 			
 			pdo($pdo, $sql);
@@ -65,7 +61,8 @@
 
 	function check_tag($tag) {
 		// We're going to check if a tag exists in the table
-		$sql = "SELECT name FROM tags WHERE name = $tag";
+		global $pdo;
+		$sql = "SELECT name FROM tags WHERE name = '$tag'";
 		$tag = pdo($pdo, $sql)->fetch();
 
 		if(!$tag) {
@@ -77,6 +74,8 @@
 
 	function create_page($post) {
 		// We don't need to insert ID, updated_at, or times_visited because they can all default.
+		global $pdo;
+
 		$page_sql = "INSERT INTO pages (abbreviation, title, description, category_id, sub_category_id, file_name, keywords) VALUES (:abbreviation, :title, :description, :category_id, :sub_category_id, :file_name, :keywords)";
 
 		// Create the file name
@@ -98,7 +97,7 @@
 		$values['keywords'] = $post['keywords'];						// Get the keywords
 
 		// Run the SQL
-		pdo($pdo, $sql, $values);
+		pdo($pdo, $page_sql, $values);
 
 		// Get the Id of the page we just made, need this for later
 		$page_id = $pdo->lastInsertId();
@@ -106,11 +105,13 @@
 		// Before running the file creation, we need to check for the existence of the directories
 		if (folder_exists(("pages/" . $post['category']))) {
 			// This is such a counter intuitive if statement because it only runs if category DOES NOT exist
+			echo "Made " . $post['category'] . " directory";
 			mkdir(("pages/" . $post['category']), 0755);
 		}
 
 		if (folder_exists(("pages/" . $post['category'] . $post['sub_category']))) {
 			// This is such a counter intuitive if statement because it only runs if category DOES NOT exist
+			echo "Made " . $post['sub_category'] . " directory";
 			mkdir(("pages/" . $post['category'] . $post['sub_category']), 0755);
 		}
 
@@ -119,12 +120,12 @@
 
 		if (str_replace(" ", "", $post['tag_list']) != "") {
 			// If we have some tags to work with
-			$list_of_tags = explode(",", $tag_list);
+			$list_of_tags = explode(",", $post['tag_list']);
 			foreach($list_of_tags as $tag) {
 				$tag_exists = check_tag($tag);
 				if ($tag_exists) {
 					// Increment the tag count by 1
-					$update_sql = "UPDATE tags SET count = count + 1 WHERE name = $tag";
+					$update_sql = "UPDATE tags SET count = count + 1 WHERE name = '$tag'";
 					pdo($pdo, $update_sql);
 
 					// Add a record linking the tag and the project
@@ -132,7 +133,7 @@
 					pdo($pdo, $relation_sql);
 				} else {
 					// Create an entry for the tag
-					$insert_sql = "INSERT INTO tags (count) VALUES '$tag'";
+					$insert_sql = "INSERT INTO tags (name) VALUES ('$tag')";
 					pdo($pdo, $insert_sql);
 
 					$last_tag_id = $pdo->lastInsertId();
@@ -152,6 +153,9 @@
 		fclose($file);
 	}
 
+
+
+	add_header("Create page", ['tooltip.css']);
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// Can we move this whole section to a separate function, passing $_POST as an arg
@@ -229,9 +233,7 @@
 					foreach($categories as $category) {
 						?>
 						<!-- We need to use <option></option> in order to be able to use the "selected" property -->
-						<option value="<?= $category ?>">
-							<?= $category ?>
-						</option> <?php 
+						<option value="<?= $category['name'] ?>"><?= $category['name'] ?></option> <?php 
 					}
 					?>
 				</datalist><br>
@@ -245,13 +247,14 @@
 				<datalist id="sub_category">
 					<!-- Get the available sub-categories and slap them here -->
 					<?php 
-					$sql = "SELECT sub_category.name, category.name FROM sub_category JOIN category on category.id = sub_category.parent_id"; // This should get a distinct list of sub-categories
+					$sql = "SELECT sub_category.name AS sub_category_name, category.name AS category_name FROM sub_category JOIN category on category.id = sub_category.parent_id"; // This should get a distinct list of sub-categories
 					$sub_categories = pdo($pdo, $sql)->fetchAll();
+					echo var_dump($sub_categories);
 					foreach($sub_categories as $sub_category) {
 						// This is by no means optimal, but it will do the job for now
-						?>
-						<option value="/<?= $sub_category['category.name'] ?>/<?= $sub_category['sub_category.name'] ?>">
-							<?= $sub_category['category.name'] . "/" . $sub_category['sub_category.name'] ?>
+						?> 
+						<option value="/<?= $sub_category['category_name'] ?>/<?= $sub_category['sub_category_name'] ?>">
+							<?= $sub_category['category_name'] . "/" . $sub_category['sub_category_name'] ?>
 						</option> <?php
 					}
 					?> 
