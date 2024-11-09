@@ -13,22 +13,25 @@
 		echo "OH SHIT";
 	}
 
-	$sql = "SELECT * FROM pages WHERE abbreviation = '$topic'";
+	$sql = "SELECT pages.title, pages.abbreviation, pages.description, pages.file_name, category.name AS category, sub_category.name AS sub_category FROM pages JOIN category ON pages.category_id = category.id JOIN sub_category ON pages.sub_category_id = sub_category.id WHERE pages.abbreviation = '$topic';";
+
 	$page_info = pdo($pdo, $sql)->fetch();
 
 	if (!$page_info) {
 		echo "OH FUCK";
 	}
 
-	add_header($page_info['title']);
+	add_header($page_info['title'], [], ["md-block.js"]);
 ?>
 
 	<div>
 		<h1><?= $page_info['title'] ?></h1>
 		<p><?= $page_info['description'] ?></p>
-		<a href="edit_topic.php?topic=<?= $page_info['id'] ?>">Edit page</a>
+		<a href="edit_topic.php?topic=<?= $page_info['abbreviation']; ?>">Edit page</a>
 		<!-- Testing suggests that this method of echoing Markdown is not vulnerable, but I should test it some more -->
-		<md-block untrusted src="/pages/<?= $page_info['category'] ?>/<?= $page_info['sub_category'] ?>/<?= $page_info['file_name'] ?>"></md-block>
+		<p>
+			<md-block untrusted src="pages/<?= $page_info['category'] ?>/<?= $page_info['sub_category'] ?>/<?= $page_info['file_name'] ?>"></md-block>
+		</p>
 	</div>
 </body>
 </html>
