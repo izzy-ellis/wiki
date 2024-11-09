@@ -103,13 +103,13 @@
 		$page_id = $pdo->lastInsertId();
 
 		// Before running the file creation, we need to check for the existence of the directories
-		if (folder_exists(("pages/" . $post['category']))) {
+		if (!folder_exists(("pages/" . $post['category']))) {
 			// This is such a counter intuitive if statement because it only runs if category DOES NOT exist
 			echo "Made " . $post['category'] . " directory";
 			mkdir(("pages/" . $post['category']), 0755);
 		}
 
-		if (folder_exists(("pages/" . $post['category'] . $post['sub_category']))) {
+		if (!folder_exists(("pages/" . $post['category'] . $post['sub_category']))) {
 			// This is such a counter intuitive if statement because it only runs if category DOES NOT exist
 			echo "Made " . $post['sub_category'] . " directory";
 			mkdir(("pages/" . $post['category'] . $post['sub_category']), 0755);
@@ -120,6 +120,7 @@
 
 		if (str_replace(" ", "", $post['tag_list']) != "") {
 			// If we have some tags to work with
+			// Check for null tags
 			$list_of_tags = explode(",", $post['tag_list']);
 			foreach($list_of_tags as $tag) {
 				$tag_exists = check_tag($tag);
