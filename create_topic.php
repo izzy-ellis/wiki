@@ -112,7 +112,7 @@
 		if (!folder_exists(("pages/" . $post['category'] . $post['sub_category']))) {
 			// This is such a counter intuitive if statement because it only runs if category DOES NOT exist
 			echo "Made " . $post['sub_category'] . " directory";
-			mkdir(("pages/" . $post['category'] . $post['sub_category']), 0755);
+			mkdir(("pages/" . $post['category'] . "/" . $post['sub_category']), 0755);
 		}
 
 		// Save the tags, will need to save individual tags, and the match up of tags 
