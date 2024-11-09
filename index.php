@@ -14,7 +14,8 @@
 			$sql = "SELECT * FROM pages";
 			$pages = pdo($pdo, $sql)->fetchAll();
 
-		
+			$sql2 = "INSERT INTO tags (name) VALUES ('test')";
+			pdo($pdo, $sql2);
 			/*foreach ($pages as $page) {
 				$file_path = "/pages/" . $page['category'] . "/" . $page['sub_category'] . "/" . $page['file_name'];
 				?>
