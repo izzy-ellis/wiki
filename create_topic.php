@@ -109,7 +109,7 @@
 			mkdir(("pages/" . $post['category']), 0755);
 		}
 
-		if (!folder_exists(("pages/" . $post['category'] . $post['sub_category']))) {
+		if (!folder_exists(("pages/" . $post['category'] . "/" . $post['sub_category']))) {
 			// This is such a counter intuitive if statement because it only runs if category DOES NOT exist
 			echo "Made " . $post['sub_category'] . " directory";
 			mkdir(("pages/" . $post['category'] . "/" . $post['sub_category']), 0755);
@@ -146,10 +146,10 @@
 		}
 
 		// Making the path to the file
-		$file_path = "/pages/" . $_POST['category'] . "/" . $_POST['sub_category'] . $file_name;
+		$file_path = "pages/" . $post['category'] . "/" . $post['sub_category'] . "/" . $file_name;
 
 		// Writing the Markdown file
-		$file = fopen($file_name, "w") or die("OH BALLS");
+		$file = fopen($file_path, "w") or die("OH BALLS");
 		fwrite($file, $_POST['text']);
 		fclose($file);
 	}
