@@ -20,7 +20,8 @@
 				<p><a href="<?= $file_path ?>"><?= $page['title'] ?></a></p> <?php
 			} */
 		?>
-		<md-block src="README.md"></md-block>
+		<script type="text/javascript" src="js/md-block.js"></script>
+		<p><md-block untrusted src="README.md">No file found</md-block></p>
 	</div>
 </body>
 </html>
