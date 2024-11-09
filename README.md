@@ -5,7 +5,10 @@ My attempt at making a cheap and cheerful wiki
 - ### Create Form
 	- Input validation
 	- Making missing directories
+		- Hopefully I have reworked the way the directories are checked
 	- Tag handling
+		- Check for null tags
+	- Move the creation function back to its own file
 - ### Misc
 	- Redesign edit form for handling the actual pages
 		- Can we make the edit form work off of the create_form?
