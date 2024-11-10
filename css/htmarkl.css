@@ -1,0 +1,49 @@
+/* Some sort of Markdown in HTML */
+
+code {
+	font-family: monospace;
+}
+
+code.command {
+	background-color: #f1f1f1;
+	padding: 2px;
+	border-radius: 2px;
+}
+
+div.code-block {
+	background-color: #f1f1f1;
+	padding: 2px;
+	border-radius: 5px;
+}
+
+span.keyword {
+	color: orange;
+}
+
+span.function {
+	color: blue;
+}
+
+span.string {
+	color: #00aa00;
+}
+
+span.builtin {
+	color: purple;
+}
+
+span.comment {
+	color: red;
+}
+
+table {
+	border-width: thin;
+	border-style: solid;
+	max-width: 800px;
+}
+
+th, td {
+	border-width: thin;
+	border-style: solid;
+	padding: 5px;
+}
