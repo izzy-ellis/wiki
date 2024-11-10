@@ -5,13 +5,17 @@
 	<script> function('<\?php echo json_encode($php_variable)?>'); </script>
 -->
 <!-- W3 How To - Hoverable Dropdown --> 
-<div>
-	<a href="index.php">Home</a>
-	<form>
-		<label for="search">Search:</label>
-		<input type="search" id="search" name="search">
-		<input type="submit">
-	</form>
-	<a href="create_topic.php">Create page</a>
+<div class="column-full">
+	<table style="width:100%">
+		<td><a href="index.php">Home</a></td>
+		<td>
+			<form>
+				<label for="search">Search:</label>
+				<input type="search" id="search" name="search">
+				<input type="submit">
+			</form>
+		</td>
+		<td><a href="create_topic.php">Create page</a></td>
+	</table>
 </div>
 <hr>
