@@ -21,17 +21,28 @@
 		echo "OH FUCK";
 	}
 
-	add_header($page_info['title'], [], ["md-block.js"]);
+	$sql = "UPDATE pages SET times_visited = times_visited + 1 WHERE abbreviation = '{$page_info['abbreviation']}'"
+	pdo($pdo, $sql);
+
+	add_header($page_info['title'], ["htmarkl.css"]);
 ?>
 
-	<div>
+	<div class="column-three-quarters">
 		<h1><?= $page_info['title'] ?></h1>
 		<p><?= $page_info['description'] ?></p>
+	</div>
+	<div class="column-quarter">
 		<a href="edit_topic.php?topic=<?= $page_info['abbreviation']; ?>">Edit page</a>
-		<!-- Testing suggests that this method of echoing Markdown is not vulnerable, but I should test it some more -->
-		<p>
-			<md-block untrusted src="pages/<?= $page_info['category'] ?>/<?= $page_info['sub_category'] ?>/<?= $page_info['file_name'] ?>"></md-block>
-		</p>
+	</div>
+	<div class="column-full content">
+		<?php
+		$file_path = "pages/" . $page_info['category'] . "/" . $page_info['sub_category'] . "/" . $page_info['file_name'];
+
+		$file = fopen($file_path, "r") or die("OH BALLS");
+		echo fread($file, filesize($file_path));
+		fclose($file);
+
+		?>
 	</div>
 </body>
 </html>
