@@ -17,6 +17,7 @@
 				?> <link rel="stylesheet" href="css/<?= $css_file ?>"> <?php
 			} ?>
 			<link rel="stylesheet" href="css/autocomplete.css">
+			<link rel="stylesheet" href="css/liquid.css">
 
 			<?php
 			// Add the JavaScript includes
