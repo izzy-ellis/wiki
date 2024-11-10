@@ -7,19 +7,29 @@
 	add_header("Wiki");
 ?>
 
-	<div>
-		<h1>Home page</h1>
+	<div id="content" class="column-full">
+		<div id="side-nav-bar" class="column-third">
+			<!-- Here we are going to list all the categories and their sub-categories -->
+			<?php
+				$category_sql = "SELECT id, name FROM category";
+				$categories = pdo($pdo, $category_sql)->fetchAll();
 
-		<?php
-			$sql = "SELECT * FROM pages";
-			$pages = pdo($pdo, $sql)->fetchAll();
-
-			/*foreach ($pages as $page) {
-				$file_path = "/pages/" . $page['category'] . "/" . $page['sub_category'] . "/" . $page['file_name'];
-				?>
-				<p><a href="<?= $file_path ?>"><?= $page['title'] ?></a></p> <?php
-			} */
-		?>
+				foreach($categories as $category) {
+				?><h2><?= $category['name']; ?></h2>
+					<ul>
+						<?php 
+						$sub_category_sql = "SELECT id, name FROM sub_category WHERE parent_id = {$category['id']}";
+						$sub_categories = pdo($pdo, $sub_category_sql)->fetchAll();
+						foreach ($sub_categories as $sub_category) {
+							?> <li><a href=""><?= $sub_category['name'] ?></a></li> <?php
+						} ?> </ul> <?php
+				}
+			?>
+		</div>
+		<div id="main-bar" class="column-two-thirds">
+			<!-- List a number of recent projects here -->
+		</div>
+		
 		
 	</div>
 </body>
