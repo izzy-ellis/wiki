@@ -9,8 +9,9 @@
 		/*
 		This function is going to get the name of a category and a value that might be in it.
 		*/
+		global $pdo;
 		$sql = "SELECT id FROM $table WHERE name = '$value'";
-		$id = pdo($pdo, $sql, $values)->fetch();
+		$id = pdo($pdo, $sql)->fetch();
 
 		if (!$id) {
 			// This runs if we have no ID
@@ -20,10 +21,7 @@
 				
 			} else {
 				// This is run if we are checking a sub-category
-				$sql = "INSERT INTO :table (name, parent_id) VALUES (:name, :parent_id)";
-				$values['table'] = $table;
-				$values['name'] = $value;
-				$values['parent_id'] = $parent_id;
+				$sql = "INSERT INTO $table (name, parent_id) VALUES ('$value', $parent_id)";
 			}
 			
 			pdo($pdo, $sql);
@@ -32,6 +30,7 @@
 			return $pdo->lastInsertId();
 		} else {
 			// We have an ID so we can return it
+			$update_sql = "UPDATE $table SET child_count = $child_count + 1 WHERE name = '$value'";
 			return $id['id'];
 		}
 	}
@@ -56,7 +55,8 @@
 
 	function check_tag($tag) {
 		// We're going to check if a tag exists in the table
-		$sql = "SELECT name FROM tags WHERE name = $tag";
+		global $pdo;
+		$sql = "SELECT name FROM tags WHERE name = '$tag'";
 		$tag = pdo($pdo, $sql)->fetch();
 
 		if(!$tag) {
@@ -68,10 +68,12 @@
 
 	function create_page($post) {
 		// We don't need to insert ID, updated_at, or times_visited because they can all default.
+		global $pdo;
+
 		$page_sql = "INSERT INTO pages (abbreviation, title, description, category_id, sub_category_id, file_name, keywords) VALUES (:abbreviation, :title, :description, :category_id, :sub_category_id, :file_name, :keywords)";
 
 		// Create the file name
-		$file_name = $post['abbreviation'] . ".md";
+		$file_name = $post['abbreviation'] . ".html";
 
 		// Collate all the values into an array
 		$values['abbreviation'] = $post['abbreviation'];				// Get the abbreviation
@@ -89,20 +91,22 @@
 		$values['keywords'] = $post['keywords'];						// Get the keywords
 
 		// Run the SQL
-		pdo($pdo, $sql, $values);
+		pdo($pdo, $page_sql, $values);
 
 		// Get the Id of the page we just made, need this for later
 		$page_id = $pdo->lastInsertId();
 
 		// Before running the file creation, we need to check for the existence of the directories
-		if (folder_exists(("pages/" . $post['category']))) {
+		if (!folder_exists(("pages/" . $post['category']))) {
 			// This is such a counter intuitive if statement because it only runs if category DOES NOT exist
+			echo "Made " . $post['category'] . " directory";
 			mkdir(("pages/" . $post['category']), 0755);
 		}
 
-		if (folder_exists(("pages/" . $post['category'] . $post['sub_category']))) {
+		if (!folder_exists(("pages/" . $post['category'] . "/" . $post['sub_category']))) {
 			// This is such a counter intuitive if statement because it only runs if category DOES NOT exist
-			mkdir(("pages/" . $post['category'] . $post['sub_category']), 0755);
+			echo "Made " . $post['sub_category'] . " directory";
+			mkdir(("pages/" . $post['category'] . "/" . $post['sub_category']), 0755);
 		}
 
 		// Save the tags, will need to save individual tags, and the match up of tags 
@@ -110,12 +114,15 @@
 
 		if (str_replace(" ", "", $post['tag_list']) != "") {
 			// If we have some tags to work with
-			$list_of_tags = explode(",", $tag_list);
+			// Check for null tags
+			$list_of_tags = explode(",", $post['tag_list']);
 			foreach($list_of_tags as $tag) {
+				// Skip adding the tag if it is null
+				if (str_replace(" ", "", $tag)) { continue; }
 				$tag_exists = check_tag($tag);
 				if ($tag_exists) {
 					// Increment the tag count by 1
-					$update_sql = "UPDATE tags SET count = count + 1 WHERE name = $tag";
+					$update_sql = "UPDATE tags SET count = count + 1 WHERE name = '$tag'";
 					pdo($pdo, $update_sql);
 
 					// Add a record linking the tag and the project
@@ -123,7 +130,7 @@
 					pdo($pdo, $relation_sql);
 				} else {
 					// Create an entry for the tag
-					$insert_sql = "INSERT INTO tags (count) VALUES '$tag'";
+					$insert_sql = "INSERT INTO tags (name) VALUES ('$tag')";
 					pdo($pdo, $insert_sql);
 
 					$last_tag_id = $pdo->lastInsertId();
@@ -135,11 +142,11 @@
 		}
 
 		// Making the path to the file
-		$file_path = "/pages/" . $_POST['category'] . "/" . $_POST['sub_category'] . $file_name;
+		$file_path = "pages/" . $post['category'] . "/" . $post['sub_category'] . "/" . $file_name;
 
 		// Writing the Markdown file
-		$file = fopen($file_name, "w") or die("OH BALLS");
-		fwrite($file, $_POST['text']);
+		$file = fopen($file_path, "w") or die("OH BALLS");
+		fwrite($file, $post['text']);
 		fclose($file);
 	}
 ?>
