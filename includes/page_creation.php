@@ -30,7 +30,9 @@
 			return $pdo->lastInsertId();
 		} else {
 			// We have an ID so we can return it
-			$update_sql = "UPDATE $table SET child_count = $child_count + 1 WHERE name = '$value'";
+			$update_sql = "UPDATE $table SET child_count = child_count + 1 WHERE name = '$value'";
+			pdo($pdo, $update_sql);
+			
 			return $id['id'];
 		}
 	}
