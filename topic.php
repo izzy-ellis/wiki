@@ -21,7 +21,7 @@
 		echo "OH FUCK";
 	}
 
-	$sql = "UPDATE pages SET times_visited = times_visited + 1 WHERE abbreviation = '{$page_info['abbreviation']}'"
+	$sql = "UPDATE pages SET times_visited = times_visited + 1 WHERE abbreviation = '{$page_info['abbreviation']}'";
 	pdo($pdo, $sql);
 
 	add_header($page_info['title'], ["htmarkl.css"]);
