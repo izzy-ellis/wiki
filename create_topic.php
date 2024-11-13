@@ -49,15 +49,13 @@
 			<label for="category">
 				Category: <?= add_tooltip("The category of the page") ?>
 			</label><br>
-			<input list="category" name="category" id="category">
+			<input list="category" name="category">
 				<datalist id="category">
-					<!-- Get the available categories and dump them here -->
 					<?php 
 					$sql = "SELECT DISTINCT name FROM category";	// Get the distinct categories
 					$categories = pdo($pdo, $sql)->fetchAll();
 					foreach($categories as $category) {
 						?>
-						<!-- We need to use <option></option> in order to be able to use the "selected" property -->
 						<option value="<?= $category['name'] ?>"><?= $category['name'] ?></option> <?php 
 					}
 					?>
@@ -68,19 +66,16 @@
 			<label for="sub_category">
 				Sub-category: <?= add_tooltip("The sub-category of the page") ?>
 			</label><br>
-			<input list="sub_category" name="sub_category" id="sub_category">
+			<input list="sub_category" name="sub_category">
 				<datalist id="sub_category">
 					<!-- Get the available sub-categories and slap them here -->
 					<?php 
-					$sql = "SELECT sub_category.name AS sub_category_name, category.name AS category_name FROM sub_category JOIN category on category.id = sub_category.parent_id"; // This should get a distinct list of sub-categories
+					$sql = "SELECT sub_category.name AS sub_category_name, category.name AS category_name FROM sub_category JOIN category ON category.id = sub_category.parent_id"; // This should get a distinct list of sub-categories
 					$sub_categories = pdo($pdo, $sql)->fetchAll();
-					echo var_dump($sub_categories);
 					foreach($sub_categories as $sub_category) {
 						// This is by no means optimal, but it will do the job for now
 						?> 
-						<option value="/<?= $sub_category['category_name'] ?>/<?= $sub_category['sub_category_name'] ?>">
-							<?= $sub_category['category_name'] . "/" . $sub_category['sub_category_name'] ?>
-						</option> <?php
+						<option value="/<?= $sub_category['category_name'] ?>/<?= $sub_category['sub_category_name'] ?>"><?= $sub_category['category_name'] . "/" . $sub_category['sub_category_name'] ?></option> <?php
 					}
 					?> 
 				</datalist><br>
