@@ -16,8 +16,9 @@
 				// We can auto-include autocomplete.css as every page will have the search bar
 				?> <link rel="stylesheet" href="css/<?= $css_file ?>"> <?php
 			} ?>
-			<link rel="stylesheet" href="css/autocomplete.css">
-			<link rel="stylesheet" href="css/liquid.css">
+			<link rel="stylesheet" type="text/css" href="css/autocomplete.css">
+			<link rel="stylesheet" type="text/css" href="css/liquid.css">
+			<link rel="stylesheet" type="text/css" href="css/styles.css">
 
 			<?php
 			// Add the JavaScript includes
