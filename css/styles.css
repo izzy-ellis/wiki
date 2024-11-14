@@ -1,0 +1,29 @@
+/* These are gonna be generic styles for the whole site */
+
+div.bordered {
+	border: solid;
+	border-style: thin;
+	border-color: #c1c1c1;
+}
+
+div.textbox {
+	margin: 1%;
+	padding: 1%;
+}
+
+a.non-link {
+	color: black;
+	text-decoration: none;
+}
+
+a.non-link:hover {
+	text-decoration: underline;
+}
+
+p.small {
+	font-size: 14px;
+}
+
+p.grey {
+	color: #a0a0a0;
+}
