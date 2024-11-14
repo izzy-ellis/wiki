@@ -4,6 +4,7 @@ My attempt at making a cheap and cheerful wiki
 ## To-do list
 - ### Create Form
 	- Input validation
+	- Something is wrong with the sub categories, probably need to add some JS
 	- Add Markup cheatsheet
 - ### Misc
 	- Redesign edit form for handling the actual pages
@@ -11,6 +12,7 @@ My attempt at making a cheap and cheerful wiki
 	- Add search feature
 	- Add footer
 	- Finish index.php code
+	- Add sub-category and tag pages
 
 ## Known issues
 - When linking in Markdown, you need to include the root folder of the page (in this case /wiki/page.php). I do not know if this will apply on LAMP (I guess it depends on whether I have a root folder)
