@@ -22,7 +22,7 @@
 						$sub_category_sql = "SELECT id, name, child_count FROM sub_category WHERE parent_id = {$category['id']}";
 						$sub_categories = pdo($pdo, $sub_category_sql)->fetchAll();
 						foreach ($sub_categories as $sub_category) {
-							?> <li><a href=""><?= $sub_category['name'] ?> (<?= $sub_category['child_count'] ?>)</a></li> <?php
+							?> <li><a href="sub_category.php?id=<?= $sub_category['id'] ?>"><?= $sub_category['name'] ?> (<?= $sub_category['child_count'] ?>)</a></li> <?php
 						} ?> </ul> <?php
 				}
 			?>
