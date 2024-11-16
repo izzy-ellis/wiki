@@ -6,6 +6,18 @@
 <code>&lt<span class="comment">a</span> <span class="builtin">href</span>=<span class="string">"topic.php?topic=[abbreviation]"</span>&gtLink text&lt/<span class="comment">a</span>&gt</code>
 </div>
 
+<div class="column-half bordered height-100 scroller"><?php
+	$sql = "SELECT abbreviation, title FROM pages ORDER BY abbreviation ASC";
+	$abbreviations = pdo($pdo, $sql)->fetchAll();
+
+	foreach ($abbreviations as $abbreviation) {
+		echo(strtoupper($abbreviation['abbreviation']) . " - " . $abbreviation['title'] . "<br>");
+	}
+?>	
+</div>
+
+<div class="column-half height-100" name="filler"></div>
+
 <p>An inline command can be displayed using the code block with the command class</p>
 
 <div class="code-block">
