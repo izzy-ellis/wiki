@@ -5,7 +5,6 @@ My attempt at making a cheap and cheerful wiki
 - ### Create Form
 	- Input validation
 	- Something is wrong with the sub categories, probably need to add some JS
-	- Add Markup cheatsheet
 - ### Misc
 	- Add search feature
 	- Add footer
