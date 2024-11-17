@@ -40,3 +40,15 @@ body {
 	float: left;
 	margin: 1%;
 }
+
+.column-fifth {
+	width: 18%;
+	float: left;
+	margin: 1%;
+}
+
+.column-two-fifths {
+	width: 38%;
+	float: left;
+	margin: 1%;
+}
