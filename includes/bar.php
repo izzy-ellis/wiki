@@ -9,7 +9,7 @@
 	<table style="width:100%">
 		<td><a href="index.php">Home</a></td>
 		<td>
-			<form>
+			<form name="search" action="search.php">
 				<label for="search">Search:</label>
 				<input type="search" id="search" name="search">
 				<input type="submit">
