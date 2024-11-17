@@ -6,7 +6,6 @@ My attempt at making a cheap and cheerful wiki
 	- Input validation
 	- Something is wrong with the sub categories, probably need to add some JS
 - ### Misc
-	- Add search feature
 	- Add footer
 	- Finish index.php code
 	- Add tag pages
