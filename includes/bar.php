@@ -15,7 +15,12 @@
 				<input type="submit">
 			</form>
 		</td>
-		<td><a href="create_topic.php">Create page</a></td>
+		<td>
+			<ul class="navlist">
+				<li><a href="indeks.php">Index</a></li>
+				<li><a href="create_topic.php">Create page</a></li>
+			</ul>
+		</td>
 	</table>
 </div>
 <hr>
