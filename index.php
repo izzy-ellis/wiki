@@ -29,27 +29,31 @@
 		</div>
 		<div class="column-two-fifths">
 			<h1>Popular pages</h1>
+			<ul>
 			<?php
 			$popular_sql = "SELECT title, abbreviation, description, category.name AS category, sub_category.name AS sub_category FROM pages JOIN category ON category.id = pages.category_id JOIN sub_category ON sub_category.id = pages.sub_category_id ORDER BY pages.times_visited DESC LIMIT 3";
 
 			$popular_pages = pdo($pdo, $popular_sql)->fetchAll();
 
 			foreach ($popular_pages as $page) {
-				display_page($page);
+				?><li> <?= display_page($page); ?> </li> <?php
 			}
 			?>
+			</ul>
 		</div>
 		<div id="recents" class="column-two-fifths">
 			<h1>Recent pages</h1>
+			<ul>
 			<!-- List a number of recent projects here -->
 			<?php
 			$recents_sql = "SELECT title, abbreviation, description, category.name AS category, sub_category.name AS sub_category FROM pages JOIN category ON category.id = pages.category_id JOIN sub_category ON sub_category.id = pages.sub_category_id ORDER BY pages.updated_at DESC LIMIT 3";
 			$recent_pages = pdo($pdo, $recents_sql)->fetchAll();
 
 			foreach($recent_pages as $page) {
-				display_page($page);
+				?><li> <?= display_page($page); ?> </li> <?php
 			}
 			?>
+			</ul>
 		</div>	
 	</div>
 
