@@ -20,10 +20,10 @@ CREATE TABLE `wiki_test`.`tags` (`id` INT NOT NULL AUTO_INCREMENT COMMENT 'The I
 
 ## category table
 ```
-CREATE TABLE `wiki_test`.`category` (`id` INT NOT NULL AUTO_INCREMENT COMMENT 'The ID of the category' , `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'The time the category was updated/made' , `name` TEXT NOT NULL COMMENT 'The name of the category' , `child_count` INT NOT NULL DEFAULT '0' COMMENT 'The number of sub-categorys' , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `wiki_test`.`category` (`id` INT NOT NULL AUTO_INCREMENT COMMENT 'The ID of the category' , `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'The time the category was updated/made' , `name` TEXT NOT NULL COMMENT 'The name of the category' , `child_count` INT NOT NULL DEFAULT '1' COMMENT 'The number of sub-categorys' , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 ```
 
 ## sub-category table
 ```
-CREATE TABLE `wiki_test`.`sub_category` (`id` INT NOT NULL AUTO_INCREMENT COMMENT 'The ID of the sub-category' , `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'The time the sub-category was created/updated' , `name` TEXT NOT NULL COMMENT 'The name of the sub-category' , `parent_id` INT NOT NULL COMMENT 'The ID of the parent category' , `child_count` INT NOT NULL DEFAULT '0' COMMENT 'The number of files in the sub-category' , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `wiki_test`.`sub_category` (`id` INT NOT NULL AUTO_INCREMENT COMMENT 'The ID of the sub-category' , `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'The time the sub-category was created/updated' , `name` TEXT NOT NULL COMMENT 'The name of the sub-category' , `parent_id` INT NOT NULL COMMENT 'The ID of the parent category' , `child_count` INT NOT NULL DEFAULT '1' COMMENT 'The number of files in the sub-category' , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 ```
