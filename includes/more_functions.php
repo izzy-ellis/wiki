@@ -3,10 +3,9 @@
 
 function display_page($page) {
 	// The page argument should have values for title, abbreviation, description, category, and sub_category
-	$path = $page['category'] . "/" . $page['sub_category'];
-				?> <a href="topic.php?topic=<?= $page['abbreviation'] ?>">
-				<?= strtoupper($page['abbreviation']) . " - " . $page['title'] ?>
-				</a>
+	?> <a href="topic.php?topic=<?= $page['abbreviation'] ?>">
+	<?= strtoupper($page['abbreviation']) . " - " . $page['title'] ?>
+	</a>
 <?php }
 
 function display_search_results($array_of_arrays) {
