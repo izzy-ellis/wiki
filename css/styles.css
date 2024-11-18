@@ -29,6 +29,16 @@ a.non-link:hover {
 	text-decoration: underline;
 }
 
+ul.index {
+	list-style-type: none;
+}
+
+ul.navlist li {
+	list-style-type: none;
+	display: inline;
+	margin-right: 20px;
+}
+
 p.small {
 	font-size: 14px;
 }
