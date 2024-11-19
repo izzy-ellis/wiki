@@ -22,5 +22,5 @@
 			</ul>
 		</td>
 	</table>
+	<hr>
 </div>
-<hr>
