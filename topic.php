@@ -24,7 +24,7 @@
 	$sql = "UPDATE pages SET times_visited = times_visited + 1 WHERE abbreviation = '{$page_info['abbreviation']}'";
 	pdo($pdo, $sql);
 
-	add_header($page_info['title'], ["htmarkl.css"]);
+	add_header($page_info['title'], ["htmarkl.css"], ['headings.js']);
 ?>
 
 	<div class="column-three-quarters">
@@ -34,7 +34,8 @@
 	<div class="column-quarter">
 		<a href="edit_topic.php?topic=<?= $page_info['abbreviation']; ?>">Edit page</a>
 	</div>
-	<div class="column-full content">
+	<div class="column-full padding"></div>
+	<div class="column-three-quarters content" id="content">
 		<?php
 		$file_path = "pages/" . $page_info['category'] . "/" . $page_info['sub_category'] . "/" . $page_info['file_name'];
 
@@ -44,5 +45,9 @@
 
 		?>
 	</div>
-</body>
-</html>
+	<div id="headings-box" class="column-quarter">
+		<pre id="headings-list-pre">
+		</pre>
+	</div>
+
+<?php include 'includes/footer.php'; ?>
