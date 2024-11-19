@@ -12,7 +12,12 @@ div.textbox {
 	padding: 0 1% 0 1%;
 }
 
-div.height-100 {
+div.padding {
+	margin: 0;
+	height: 1px;
+}
+
+div.height-150 {
 	height: 150px;
 }
 
