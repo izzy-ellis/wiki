@@ -3,8 +3,7 @@
 
 function display_page($page) {
 	// The page argument should have values for title, abbreviation, description, category, and sub_category
-	?> <a href="topic.php?topic=<?= $page['abbreviation'] ?>">
-	<?= strtoupper($page['abbreviation']) . " - " . $page['title'] ?>
+	?> <a href="topic.php?topic=<?= $page['abbreviation'] ?>"><?= strtoupper($page['abbreviation']) . " - " . $page['title'] ?>
 	</a>
 <?php }
 

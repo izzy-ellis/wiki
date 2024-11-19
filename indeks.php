@@ -5,12 +5,12 @@
 	include 'includes/header.php';
 	include 'includes/more_functions.php';
 
-	add_header("Index");
+	add_header("Index", [], ['sort-list.js']);
 
 ?>
 
 <div class="column-full">
-	<ul class="index">
+	<ul class="index" id="sort-list">
 		<?php
 		$pages_sql = "SELECT title, abbreviation FROM pages";
 		$pages = pdo($pdo, $pages_sql)->fetchAll();
