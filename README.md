@@ -5,11 +5,12 @@ My attempt at making a cheap and cheerful wiki
 - ### Create Form
 	- Input validation
 	- Something is wrong with the sub categories, probably need to add some JS
+- ### Topic Display
+  	- Change the CSS for the contents
 - ### Misc
 	- Finish index.php code
 	- Add tag pages
 	- Add reference pages
-	- Add an index
 
 ## Known issues
 - When linking in Markdown, you need to include the root folder of the page (in this case /wiki/page.php). I do not know if this will apply on LAMP (I guess it depends on whether I have a root folder)
