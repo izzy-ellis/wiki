@@ -44,6 +44,11 @@ ul.navlist li {
 	margin-right: 20px;
 }
 
+li.indeks-header {
+	font-size: 18px;
+	font-weight: bold;
+}
+
 p.small {
 	font-size: 14px;
 }
