@@ -20,8 +20,9 @@
 ?>
 	<div class="column-full">
 		<h1>Sub-category: <?= $topics[0]['sub_category'] ?></h1>
+		<ul>
 		<?php
 		foreach ($topics as $topic) {
-			display_page($topic);
+			?> <li> <?= display_page($topic); ?> </li> <?php
 		} ?>
 	</div>
