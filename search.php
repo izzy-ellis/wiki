@@ -5,11 +5,15 @@
 	include 'includes/header.php';
 	include 'includes/more_functions.php';
 	
+	
 
 	$search_term = filter_input(INPUT_GET, 'search');
 	// This seems to throw an error on $topic = 0, but hey I want string page identifiers
 	if (!$search_term) {
-		echo "No search term entered";
+		add_header("Search");
+		echo "<h1>No search term entered</h1><p>Click <a href='index.php'>here</a> to return home</p>";
+		include 'includes/footer.php';
+		exit;
 	}
 
 	add_header("Search: $search_term");
