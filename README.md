@@ -5,8 +5,6 @@ My attempt at making a cheap and cheerful wiki
 - ### Create Form
 	- Input validation
 	- Something is wrong with the sub categories, probably need to add some JS
-- ### Topic Display
-  	- Change the CSS for the contents
 - ### Misc
 	- Finish index.php code
 	- Add tag pages
