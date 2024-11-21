@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
-	// Get the headings box
-	heading_box = document.getElementById("headings-list-pre");
 
 	// Get all the headings
-	headings = document.querySelectorAll("h1, h2, h3");
-
+	headings = document.querySelectorAll("h1, h2, h3");					// Get a list of all headings in the page
+	current_indentation = 1;											// The current indentation level
+	list_to_append = [];											
+	list_to_append[1] = document.getElementById("heading-list");		// The main list
 	for (i = 0; i < (headings.length - 1); i++) {
 		// Check for an id on the heading
 		id = "head" + i.toString();
@@ -16,13 +16,31 @@ document.addEventListener("DOMContentLoaded", function() {
 			headings[i].setAttribute('id', id);
 		}
 
-		paragraph = document.createElement('p');			// Create a p tag
-		link = document.createElement('a');					// Create a link
-		link.setAttribute('href', ("#" + id));				// Get the link to point to something
-		link.appendChild(document.createTextNode(headings[i].textContent));	// Get the appropriate text for the link
-		// Add some whitespace depending on the level of the heading
-		paragraph.appendChild(document.createTextNode("	".repeat(headings[i].tagName[1] - 1)));
-		paragraph.appendChild(link);						// Add the link object to the paragraph
-		heading_box.appendChild(paragraph);					// Add the paragraph to the heading box
+		working_indentation = Number(headings[i].tagName[1]);			// Get the new indentation
+		if (current_indentation == working_indentation) {
+			// This means we can just add a li element to the working list
+			list_to_append[current_indentation].appendChild(createBulletPoint(headings[i], id));
+		}
+		else if (current_indentation < working_indentation) {
+			// We need to add a new working list, and move it all around
+			for (j = 0; j < (working_indentation - current_indentation); j++) {
+				list_to_append[current_indentation + (i + 1)] = document.createElement('ul');
+				list_to_append[current_indentation].lastChild.appendChild(list_to_append[current_indentation + (i + 1)]);
+			}
+			current_indentation = working_indentation;
+			alert(list_to_append[2])
+		} else {
+			// We need to find the parent of the working list, at least once
+		}
+
+	}
+
+	function createBulletPoint(heading_element, id) {
+		bullet_point = document.createElement('li');
+		link = document.createElement('a');
+		link.setAttribute('href', ("#" + id));
+		link.appendChild(document.createTextNode(heading_element.textContent));
+		bullet_point.appendChild(link);
+		return bullet_point;
 	}
 });

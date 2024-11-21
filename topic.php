@@ -24,9 +24,15 @@
 	$sql = "UPDATE pages SET times_visited = times_visited + 1 WHERE abbreviation = '{$page_info['abbreviation']}'";
 	pdo($pdo, $sql);
 
-	add_header($page_info['title'], ["htmarkl.css"], ['headings.js']);
+	add_header($page_info['title'], ["htmarkl.css", "toc.css"], ['jquery-3.7.1.min.js','jquery.contentify.js']);
 ?>
-
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#toc').contentify({
+				title: "Contents"
+			});
+		});
+	</script>
 	<div class="column-three-quarters">
 		<h1><?= $page_info['title'] ?></h1>
 		<p><?= $page_info['description'] ?></p>
@@ -45,9 +51,6 @@
 
 		?>
 	</div>
-	<div id="headings-box" class="column-quarter">
-		<pre id="headings-list-pre">
-		</pre>
-	</div>
+	<div id="toc" class="column-quarter"></div>
 
 <?php include 'includes/footer.php'; ?>
