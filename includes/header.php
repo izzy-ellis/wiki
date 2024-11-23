@@ -19,6 +19,7 @@
 			<link rel="stylesheet" type="text/css" href="css/autocomplete.css">
 			<link rel="stylesheet" type="text/css" href="css/liquid.css">
 			<link rel="stylesheet" type="text/css" href="css/styles.css">
+			<link rel="stylesheet" type="text/css" href="css/dropdown.css">
 
 			<?php
 			// Add the JavaScript includes

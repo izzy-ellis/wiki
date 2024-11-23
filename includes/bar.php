@@ -18,6 +18,16 @@
 		<td>
 			<ul class="navlist">
 				<li><a href="indeks.php">Index</a></li>
+				<li>
+					<div class="dropdown">
+						<a class="droplink">Reference Pages</a>
+						<div class="dropdown-content">
+							<!-- <a href="">Page 1</a>
+							<a href="">Page 2</a>
+							<a href="">Page 3</a -->
+						</div>
+					</div>
+				</li>
 				<li><a href="create_topic.php">Create page</a></li>
 			</ul>
 		</td>
