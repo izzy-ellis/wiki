@@ -23,7 +23,17 @@ CREATE TABLE `wiki_test`.`tags` (`id` INT NOT NULL AUTO_INCREMENT COMMENT 'The I
 CREATE TABLE `wiki_test`.`category` (`id` INT NOT NULL AUTO_INCREMENT COMMENT 'The ID of the category' , `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'The time the category was updated/made' , `name` TEXT NOT NULL COMMENT 'The name of the category' , `child_count` INT NOT NULL DEFAULT '1' COMMENT 'The number of sub-categorys' , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 ```
 
+We use the following command to add the references category, which will be a special category for reference pages. It should have an ID of 1
+```
+INSERT INTO category (name) VALUES ("references")
+```
+
 ## sub-category table
 ```
 CREATE TABLE `wiki_test`.`sub_category` (`id` INT NOT NULL AUTO_INCREMENT COMMENT 'The ID of the sub-category' , `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'The time the sub-category was created/updated' , `name` TEXT NOT NULL COMMENT 'The name of the sub-category' , `parent_id` INT NOT NULL COMMENT 'The ID of the parent category' , `child_count` INT NOT NULL DEFAULT '1' COMMENT 'The number of files in the sub-category' , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+```
+
+We use the following command to add the references sub-category, which will be a special sub-category for reference pages. It should have an ID of 1. We want to overwrite the child count because it will start with zero
+```
+INSERT INTO category (name, parent_id, child_count) VALUES ("references", 1, 0)
 ```
