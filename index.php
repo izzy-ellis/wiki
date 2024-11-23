@@ -12,7 +12,8 @@
 		<div id="side-nav-bar" class="column-fifth">
 			<!-- Here we are going to list all the categories and their sub-categories -->
 			<?php
-				$category_sql = "SELECT id, name FROM category";
+				// We don't need to select the reference pages as these will be elsewhere
+				$category_sql = "SELECT id, name FROM category WHERE id != 1";
 				$categories = pdo($pdo, $category_sql)->fetchAll();
 
 				foreach($categories as $category) {
