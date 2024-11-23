@@ -15,7 +15,7 @@
 <div class="column-full">
 	<ul class="index" id="sort-list">
 		<?php
-		$pages_sql = "SELECT title, abbreviation FROM pages";
+		$pages_sql = "SELECT title, abbreviation, category.name AS category, sub_category.name AS sub_category FROM pages JOIN category ON category.id = pages.category_id JOIN sub_category ON sub_category.id = pages.sub_category_id";
 		$pages = pdo($pdo, $pages_sql)->fetchAll();
 
 		$alphabet = "0123456789abcdefghijklmnopqrstuvwxyz";
