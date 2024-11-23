@@ -1,13 +1,13 @@
 <?php
 $type     = 'mysql';                 // Type of database
 $server   = '127.0.0.1';             // Server the database is on
-$db       = 'wiki_test';             // Name of the database
+$db       = 'wiki';             // Name of the database
 $port     = '3306';                      // Port is usually 8889 in MAMP and 3306 in XAMPP
 $charset  = 'utf8mb4';               // UTF-8 encoding using 4 bytes of data per character
 
 // teehee ignore this very secure piece of programming
-$username = 'root';         // Enter YOUR username here
-$password = '';         // Enter YOUR password here
+$username = 'wiki-access';         // Enter YOUR username here
+$password = '${{ secrets.DB_PASS }}';         // Enter YOUR password here
 
 $options  = [                        // Options for how PDO works
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
