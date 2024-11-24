@@ -1,8 +1,6 @@
 # Wiki
 My attempt at making a cheap and cheerful wiki
 
-Making a pull request
-
 ## To-do list
 - ### Create Form
 	- Input validation
