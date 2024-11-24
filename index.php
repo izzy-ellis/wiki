@@ -1,7 +1,7 @@
 <?php
 	declare(strict_types=1);
-	require 'includes/database-connection.php';
-	require 'includes/functions.php';
+	require_once 'includes/database-connection.php';
+	require_once 'includes/functions.php';
 	include 'includes/header.php';
 	include 'includes/more_functions.php';
 

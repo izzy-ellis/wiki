@@ -5,6 +5,11 @@
 	<script> function('<\?php echo json_encode($php_variable)?>'); </script>
 -->
 <!-- W3 How To - Hoverable Dropdown --> 
+
+<?php 
+	require_once 'includes/database-connection.php';
+	require_once 'includes/functions.php';
+?>
 <div class="column-full">
 	<table style="width:100%">
 		<td><a href="index.php">Home</a></td>
