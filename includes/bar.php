@@ -22,9 +22,14 @@
 					<div class="dropdown">
 						<a class="droplink">Reference Pages</a>
 						<div class="dropdown-content">
-							<!-- <a href="">Page 1</a>
-							<a href="">Page 2</a>
-							<a href="">Page 3</a -->
+							<?php 
+							$reference_sql = "SELECT title, abbreviation, description, category.name AS category, sub_category.name AS sub_category FROM pages JOIN category ON category.id = pages.category_id JOIN sub_category ON sub_category.id = pages.sub_category_id WHERE pages.category_id = 1";
+							$references = pdo($pdo, $reference_sql)->fetchAll();
+
+							foreach($references as $reference) {
+								?> <a href="topic.php?topic=<?= $reference['abbreviation'] ?>"><?= $reference['title'] ?></a> <?php
+							}
+							?>
 						</div>
 					</div>
 				</li>
