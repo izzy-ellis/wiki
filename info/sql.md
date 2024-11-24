@@ -3,7 +3,19 @@ These are the commands that were run to set up the database for the Wiki
 
 ## pages table
 ```
-CREATE TABLE `wiki_test`.`pages` (`id` INT NOT NULL AUTO_INCREMENT COMMENT 'The ID value of the page' , `updated_at` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL COMMENT 'The time the page was edited/made' , `abbreviation` TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'The abbreviation of the page' , `title` TEXT NOT NULL COMMENT 'The title of the page' , `description` TEXT NOT NULL COMMENT 'A short description of the page' , `category_id` INT NOT NULL COMMENT 'The category ID of the page' , `sub_category_id` INT NOT NULL COMMENT 'The sub-category ID' , `file_name` TEXT NOT NULL COMMENT 'The name of the Markdown file' , `keywords` TEXT NOT NULL COMMENT 'A list of comma-separated keywords for search purposes' , `times_visited` INT NOT NULL COMMENT 'Used to keep track of popular pages' , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `pages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'The ID value of the page',
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT 'The time the page was edited/made',
+  `abbreviation` text NOT NULL COMMENT 'The abbreviation of the page',
+  `title` text NOT NULL COMMENT 'The title of the page',
+  `description` text NOT NULL COMMENT 'A short description of the page',
+  `category_id` int(11) NOT NULL COMMENT 'The category ID of the page',
+  `sub_category_id` int(11) NOT NULL COMMENT 'The sub-category ID',
+  `file_name` text NOT NULL COMMENT 'The name of the Markdown file',
+  `keywords` text NOT NULL COMMENT 'A list of comma-separated keywords for search purposes',
+  `times_visited` int(11) NOT NULL COMMENT 'Used to keep track of popular pages',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 ```
 
 ## tag_page_relation table
