@@ -101,13 +101,11 @@
 		// Before running the file creation, we need to check for the existence of the directories
 		if (!folder_exists(("pages/" . $post['category']))) {
 			// This is such a counter intuitive if statement because it only runs if category DOES NOT exist
-			echo "Made " . $post['category'] . " directory";
 			mkdir(("pages/" . $post['category']), 0755);
 		}
 
 		if (!folder_exists(("pages/" . $post['category'] . "/" . $post['sub_category']))) {
 			// This is such a counter intuitive if statement because it only runs if category DOES NOT exist
-			echo "Made " . $post['sub_category'] . " directory";
 			mkdir(("pages/" . $post['category'] . "/" . $post['sub_category']), 0755);
 		}
 
