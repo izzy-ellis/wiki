@@ -7,8 +7,8 @@
 <!-- W3 How To - Hoverable Dropdown --> 
 
 <?php 
-	require_once 'includes/database-connection.php';
-	require_once 'includes/functions.php';
+	require 'includes/database-connection.php';
+	require 'includes/functions.php';
 ?>
 <div class="column-full">
 	<table style="width:100%">
