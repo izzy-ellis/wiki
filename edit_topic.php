@@ -22,7 +22,7 @@
 	$sql = "SELECT title, abbreviation, pages.id AS id, file_name, category.name AS category, sub_category.name AS sub_category FROM pages JOIN category ON category.id = pages.category_id JOIN sub_category ON sub_category.id = pages.sub_category_id WHERE abbreviation = '$topic'";
 	$page_info = pdo($pdo, $sql)->fetch();
 
-	add_header("Edit Topic", ['tooltip.css']);
+	add_header("Edit Topic", ['tooltip.css', 'htmarkl.css']);
 ?>
 
 	
