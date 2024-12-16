@@ -10,15 +10,21 @@
 		This function is going to get the name of a category and a value that might be in it.
 		*/
 		global $pdo;
-		$sql = "SELECT id FROM $table WHERE name = '$value'";
-		$id = pdo($pdo, $sql)->fetch();
+		if ($parent_id != 0) {
+			// Working with a sub category
+			$sql = "SELECT id FROM $table WHERE name = '$value' AND parent_id = $parent_id";
+			$id = pdo($pdo, $sql)->fetch();
+		} else {
+			$sql = "SELECT id FROM $table WHERE name = '$value'";
+			$id = pdo($pdo, $sql)->fetch();
+		}
+		
 
 		if (!$id) {
 			// This runs if we have no ID
 			if ($parent_id == 0) {
 				// This is run if we are checking a category
-				$sql = "INSERT INTO $table (name) VALUES ('$value')";
-				
+				$sql = "INSERT INTO $table (name) VALUES ('$value')";				
 			} else {
 				// This is run if we are checking a sub-category
 				$sql = "INSERT INTO $table (name, parent_id) VALUES ('$value', $parent_id)";
@@ -30,8 +36,15 @@
 			return $pdo->lastInsertId();
 		} else {
 			// We have an ID so we can return it
-			$update_sql = "UPDATE $table SET child_count = child_count + 1 WHERE name = '$value'";
-			pdo($pdo, $update_sql);
+			if ($parent_id != 0) {
+				// Working with a sub category
+				$update_sql = "UPDATE $table SET child_count = child_count + 1 WHERE name = '$value' AND parent_id = $parent_id";
+				pdo($pdo, $update_sql);
+			} else {
+				$update_sql = "UPDATE $table SET child_count = child_count + 1 WHERE name = '$value'";
+				pdo($pdo, $update_sql);
+			}
+			
 			
 			return $id['id'];
 		}
