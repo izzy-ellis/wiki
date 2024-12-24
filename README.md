@@ -13,7 +13,7 @@ My attempt at making a cheap and cheerful wiki
 	- Add reference pages
    	- Add images
    	- Add login
-   	- Add LaTeX (see MathJax)
+   	- Add LaTeX (see MathJax, https://www.mathjax.org/#gettingstarted)
    	- Add autocomplete to the search bar
 
 ## Known issues
