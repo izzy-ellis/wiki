@@ -12,13 +12,14 @@ function display_search_results($array_of_arrays) {
 	// As well as the values needed for display_page(), it also needs page IDs
 
 	$displayed_pages = [];
-
+	?> <ul> <?php 
 	foreach ($array_of_arrays as $list_of_results) {
 		foreach ($list_of_results as $result) {
 			if (!in_array($result['id'], $displayed_pages)) {
 				// If the page has not been displayed already
+				?> <li> <?php
 				display_page($result);
-				$displayed_pages[] = $result['id'];
+				$displayed_pages[] = $result['id']; ?> </li> <?php
 			}
 		}
 	}
