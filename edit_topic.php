@@ -10,7 +10,10 @@
 		// pg 487
 		// This will need updating with the new form
 
-		$sql = "UPDATE pages SET times_visited = times_visited + 1 WHERE id = {$_POST['id']}";
+		$sql = "UPDATE pages SET times_visited = times_visited + 1, keywords = :keywords WHERE id = :id";
+		$values['keywords'] = $_POST['keywords'];
+		$values['id'] = $_POST['id'];
+		pdo($pdo, $sql, $values);
 
 		$file_path = "pages/" . $_POST['category'] . "/" . $_POST['sub_category'] . "/" . $_POST['file_name'];
 		$file = fopen($file_path, 'w') or die("OH BALLS");
@@ -19,7 +22,7 @@
 		?> <a href="topic.php?topic=<?= $_POST['abbreviation'] ?>">Return</a> <?php
 	} else {
 	$topic = filter_input(INPUT_GET, 'topic');
-	$sql = "SELECT title, abbreviation, pages.id AS id, file_name, category.name AS category, sub_category.name AS sub_category FROM pages JOIN category ON category.id = pages.category_id JOIN sub_category ON sub_category.id = pages.sub_category_id WHERE abbreviation = '$topic'";
+	$sql = "SELECT title, abbreviation, keywords, pages.id AS id, file_name, category.name AS category, sub_category.name AS sub_category FROM pages JOIN category ON category.id = pages.category_id JOIN sub_category ON sub_category.id = pages.sub_category_id WHERE abbreviation = '$topic'";
 	$page_info = pdo($pdo, $sql)->fetch();
 
 	add_header("Edit Topic", ['tooltip.css', 'htmarkl.css']);
@@ -35,6 +38,10 @@
 			<!-- CSS tooltip on W3 -->
 			<label for="title">Title:</label><br>
 			<input type="text"  id="title" name="title" value="<?= $page_info['title'] ?>" readonly><br>
+
+			<!-- Adding the ability to update keywords -->
+			<label for="keywords">Keywords:</label><br>
+			<input type="text" id="keywords" name="keywords" value="<?= $page_info['keywords'] ?>"><br>
 
 			<!-- This is apparently an insecure way to pass ID --> 
 			<input type="hidden" id="id" name="id" value="<?= $page_info['id'] ?>">
