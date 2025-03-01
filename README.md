@@ -7,8 +7,6 @@ My attempt at making a cheap and cheerful wiki
 	- Something is wrong with the sub categories, probably need to add some JS
    	- Display abbreviation reference better
 - ### Misc
-	- Finish index.php code
-   		- Rejig the front page
 	- Probably get rid of tagging
 	- Add reference pages
    	- Add images
