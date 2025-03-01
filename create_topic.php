@@ -12,7 +12,7 @@
 		</div> <?php
 	}
 
-	add_header("Create page", ['tooltip.css', 'htmarkl.css']);
+	add_header("Create page", ['tooltip.css', 'htmarkl.css', 'tabs.css'], ['tabs.js']);
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
@@ -124,6 +124,6 @@
 		</div>
 		<div class="column-half">
 		<?php
-		include 'includes/markup_instructions.php'; ?>
+		include 'includes/editing_help.php'; ?>
 		</div> <?php
 	} ?>
