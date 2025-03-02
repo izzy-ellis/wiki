@@ -84,27 +84,6 @@
 					</datalist><br>
 
 				
-				<label for="tags">
-					Tags: <?= add_tooltip("Tags to help with categorising pages") ?>
-				</label><br>
-				<?php
-					// We need to get the array for the contents of the search box
-					$sql = "SELECT name FROM tags";
-					$tags = pdo($pdo, $sql)->fetchAll();
-					$plain_tags = [];
-					foreach ($tags as $tag) {
-						$plain_tags[] = $tag['name'];
-					}
-				?>
-				
-				<div class="autocomplete">
-					<input id="tag_box" type="text" name="tag_box">
-				</div>
-				<button type="button" onclick="add_tag()">Add tag</button><br>
-				<textarea id="tag_list" name="tag_list"></textarea><br>
-				<script>
-					autocomplete(document.getElementById("tag_box"), <?= json_encode($plain_tags) ?>);
-				</script>
 				<!-- Keywords -->
 				<!-- Here we just want a bunch of comma-separated words to aid with searching -->
 				<label for="keywords">

@@ -68,19 +68,6 @@
 		return false;
 	}
 
-	function check_tag($tag) {
-		// We're going to check if a tag exists in the table
-		global $pdo;
-		$sql = "SELECT name FROM tags WHERE name = '$tag'";
-		$tag = pdo($pdo, $sql)->fetch();
-
-		if(!$tag) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
 	function create_page($post) {
 		// We don't need to insert ID, updated_at, or times_visited because they can all default.
 		global $pdo;
@@ -120,38 +107,6 @@
 		if (!folder_exists(("pages/" . $post['category'] . "/" . $post['sub_category']))) {
 			// This is such a counter intuitive if statement because it only runs if category DOES NOT exist
 			mkdir(("pages/" . $post['category'] . "/" . $post['sub_category']), 0755);
-		}
-
-		// Save the tags, will need to save individual tags, and the match up of tags 
-		// We can use explode(",", $string) to get individual tags
-
-		if (str_replace(" ", "", $post['tag_list']) != "") {
-			// If we have some tags to work with
-			// Check for null tags
-			$list_of_tags = explode(",", $post['tag_list']);
-			foreach($list_of_tags as $tag) {
-				// Skip adding the tag if it is null
-				if (str_replace(" ", "", $tag)) { continue; }
-				$tag_exists = check_tag($tag);
-				if ($tag_exists) {
-					// Increment the tag count by 1
-					$update_sql = "UPDATE tags SET count = count + 1 WHERE name = '$tag'";
-					pdo($pdo, $update_sql);
-
-					// Add a record linking the tag and the project
-					$relation_sql = "INSERT INTO tag_page_relation (page_id, tag_id) VALUES ($page_id, (SELECT id FROM tags WHERE name = '$tag'))";
-					pdo($pdo, $relation_sql);
-				} else {
-					// Create an entry for the tag
-					$insert_sql = "INSERT INTO tags (name) VALUES ('$tag')";
-					pdo($pdo, $insert_sql);
-
-					$last_tag_id = $pdo->lastInsertId();
-					// Add a record linking the tag and the project
-					$relation_sql = "INSERT INTO tag_page_relation (page_id, tag_id) VALUES ($page_id, $last_tag_id)";
-					pdo($pdo, $relation_sql);
-				}
-			}
 		}
 
 		// Making the path to the file
