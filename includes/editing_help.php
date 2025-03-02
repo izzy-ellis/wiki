@@ -61,9 +61,16 @@
 	</div>
 </div>
 
-<div id="abbreviations" class="tabcontent">
-	<h3>Abbreviations instructions</h3>
-	<p>These are instructions on how to use abbreviations</p>
+<div id="abbreviations" class="tabcontent scroller" style="max-height: 800px;">
+	<h3>Abbreviations</h3>
+	<?php
+	$sql = "SELECT abbreviation, title FROM pages ORDER BY abbreviation ASC";
+	$abbreviations = pdo($pdo, $sql)->fetchAll();
+
+	foreach ($abbreviations as $abbreviation) {
+		echo(strtolower($abbreviation['abbreviation'] . " - " . $abbreviation['title'] . "<br>"));
+	} 
+	?>
 </div>
 
 <div id="latex" class="tabcontent">
