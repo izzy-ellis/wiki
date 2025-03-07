@@ -68,7 +68,7 @@
 	$abbreviations = pdo($pdo, $sql)->fetchAll();
 
 	foreach ($abbreviations as $abbreviation) {
-		echo(strtolower($abbreviation['abbreviation'] . " - " . $abbreviation['title'] . "<br>"));
+		echo("<b>" . strtolower($abbreviation['abbreviation']) . "</b>" . " - " . $abbreviation['title'] . "<br>");
 	} 
 	?>
 </div>
