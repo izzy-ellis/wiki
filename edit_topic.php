@@ -70,7 +70,7 @@
 		</form>
 	</div>
 	<div class="column-half">
-		<?php include 'includes/markup_instructions.php'; ?>
+		<?php include 'includes/editing_help.php'; ?>
 	</div> 
 <?php } ?>
 </body>
