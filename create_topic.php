@@ -12,6 +12,7 @@
 		</div> <?php
 	}
 
+	add_header("Create page", ['tooltip.css', 'htmarkl.css', 'tabs.css'], ['tabs.js']);
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
@@ -68,7 +69,7 @@
 				<label for="sub_category">
 					Sub-category: <?= add_tooltip("The sub-category of the page") ?>
 				</label><br>
-				<input list="sub_category" name="sub_category" onclick="filterSubCategories(event)">
+				<input list="sub_category" name="sub_category">
 					<datalist id="sub_category">
 						<!-- Get the available sub-categories and slap them here -->
 						<?php 
