@@ -31,26 +31,26 @@
 		y = &lt<span class="comment">span</span> <span class="builtin">class</span>=<span class="string">"builtin"</span>&gtstr&lt/<span class="comment">span</span>&gt(1)
 		&lt<span class="comment">span</span> <span class="builtin">class</span>=<span class="string">"keyword"</span>&gtreturn&lt/<span class="comment">span</span>&gt x + y&lt/<span class="comment">code</span>&gt
 	&lt/<span class="comment">pre</span>&gt
-	&lt/<span class="comment">div</span>&gt</code></pre>
+&lt/<span class="comment">div</span>&gt</code></pre>
 	</div>
 
 	<p>A table is made using the tags below. Setting the scope of the headings will help with table formatting</p>
 
 	<div class="code-block">
 	<pre><code>&lt<span class="comment">table</span>&gt
-		&lt<span class="comment">tr</span>&gt
-			&lt<span class="comment">th</span> <span class="builtin">scope</span>=<span class="string">"col"</span>&gtProtocol&lt/<span class="comment">th</span>&gt
-			&lt<span class="comment">th</span> <span class="builtin">scope</span>=<span class="string">"col"</span>&gtDescription&lt/<span class="comment">th</span>&gt
-		&lt/<span class="comment">tr</span>&gt
-		&lt<span class="comment">tr</span>&gt
-			&lt<span class="comment">td</span>&gtFTP&lt/<span class="comment">td</span>&gt
-			&lt<span class="comment">td</span>&gtUsed to transfer files between a server and client&lt/<span class="comment">td</span>&gt
-		&lt/<span class="comment">tr</span>&gt
-		&lt<span class="comment">tr</span>&gt
-			&lt<span class="comment">td</span>&gtHTTP&lt/<span class="comment">td</span>&gt
-			&lt<span class="comment">td</span>&gtUsed to retrieve web pages from a client&lt/<span class="comment">td</span>&gt
-		&lt/<span class="comment">tr</span>&gt
-	&lt/<span class="comment">table</span>&gt</code></pre>
+	&lt<span class="comment">tr</span>&gt
+		&lt<span class="comment">th</span> <span class="builtin">scope</span>=<span class="string">"col"</span>&gtProtocol&lt/<span class="comment">th</span>&gt
+		&lt<span class="comment">th</span> <span class="builtin">scope</span>=<span class="string">"col"</span>&gtDescription&lt/<span class="comment">th</span>&gt
+	&lt/<span class="comment">tr</span>&gt
+	&lt<span class="comment">tr</span>&gt
+		&lt<span class="comment">td</span>&gtFTP&lt/<span class="comment">td</span>&gt
+		&lt<span class="comment">td</span>&gtUsed to transfer files between a server and client&lt/<span class="comment">td</span>&gt
+	&lt/<span class="comment">tr</span>&gt
+	&lt<span class="comment">tr</span>&gt
+		&lt<span class="comment">td</span>&gtHTTP&lt/<span class="comment">td</span>&gt
+		&lt<span class="comment">td</span>&gtUsed to retrieve web pages from a client&lt/<span class="comment">td</span>&gt
+	&lt/<span class="comment">tr</span>&gt
+&lt/<span class="comment">table</span>&gt</code></pre>
 	</div>
 </div>
 
@@ -80,9 +80,9 @@
 
 	<p>For displayed mathematics:</p>
 	<div class="code-block">
-		<pre><code>&lt<span class="function">div</span> <span class="builtin">class</span>=<span class="string">"maths"</span>&gt
-    		$$ maths $$
-		&lt/<span class="comment">div</span>&gt</code></pre>
+		<pre><code>&lt<span class="comment">div</span> <span class="builtin">class</span>=<span class="string">"maths"</span>&gt
+    $$ maths $$
+&lt/<span class="comment">div</span>&gt</code></pre>
 	</div>
 </div>
 
