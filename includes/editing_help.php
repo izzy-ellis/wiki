@@ -23,8 +23,7 @@
 	<p>This is how to display a block of code. The pre tags allow the whitespace formatting to remain. Note that whitespace is measured from the edge of the page and is not relative. There are several different span classes that can be used to add colour to a block of code</p>
 
 	<div class="code-block">
-	<pre>
-	<code>&lt<span class="comment">div</span> <span class="builtin">class</span>=<span class="string">"code-block"</span>&gt
+	<pre><code>&lt<span class="comment">div</span> <span class="builtin">class</span>=<span class="string">"code-block"</span>&gt
 	&lt<span class="comment">pre</span>&gt
 	&lt<span class="comment">code</span>&gt&lt<span class="comment">span</span> <span class="builtin">class</span>=<span class="string">"keyword"</span>&gtdef&lt/<span class="comment">span</span>&gt &lt<span class="comment">span</span> <span class="builtin">class</span>=<span class="string">"function"</span>&gtfunc&lt/<span class="comment">span</span>&gt():
 		&lt<span class="comment">span</span> <span class="builtin">class</span>=<span class="string">"comment"</span>&gt# A comment&lt/<span class="comment">span</span>&gt
@@ -32,17 +31,13 @@
 		y = &lt<span class="comment">span</span> <span class="builtin">class</span>=<span class="string">"builtin"</span>&gtstr&lt/<span class="comment">span</span>&gt(1)
 		&lt<span class="comment">span</span> <span class="builtin">class</span>=<span class="string">"keyword"</span>&gtreturn&lt/<span class="comment">span</span>&gt x + y&lt/<span class="comment">code</span>&gt
 	&lt/<span class="comment">pre</span>&gt
-	&lt/<span class="comment">div</span>&gt
-	</code>
-	</pre>
+	&lt/<span class="comment">div</span>&gt</code></pre>
 	</div>
 
 	<p>A table is made using the tags below. Setting the scope of the headings will help with table formatting</p>
 
 	<div class="code-block">
-	<pre>
-	<code>
-	&lt<span class="comment">table</span>&gt
+	<pre><code>&lt<span class="comment">table</span>&gt
 		&lt<span class="comment">tr</span>&gt
 			&lt<span class="comment">th</span> <span class="builtin">scope</span>=<span class="string">"col"</span>&gtProtocol&lt/<span class="comment">th</span>&gt
 			&lt<span class="comment">th</span> <span class="builtin">scope</span>=<span class="string">"col"</span>&gtDescription&lt/<span class="comment">th</span>&gt
@@ -55,9 +50,7 @@
 			&lt<span class="comment">td</span>&gtHTTP&lt/<span class="comment">td</span>&gt
 			&lt<span class="comment">td</span>&gtUsed to retrieve web pages from a client&lt/<span class="comment">td</span>&gt
 		&lt/<span class="comment">tr</span>&gt
-	&lt/<span class="comment">table</span>&gt
-	</code>
-	</pre>
+	&lt/<span class="comment">table</span>&gt</code></pre>
 	</div>
 </div>
 
@@ -75,7 +68,22 @@
 
 <div id="latex" class="tabcontent">
 	<h3>LaTeX instructions</h3>
-	<p>These are instructions on how to use LaTeX</p>
+	<p>Mathematics that is written in TeX or LaTeX format is indicated using math delimiters that surround the mathematics, telling MathJax what part of your page represents mathematics and what is normal text. There are two types of equations: ones that occur within a paragraph (in-line mathematics), and larger equations that appear separated from the rest of the text on lines by themselves (displayed mathematics).</p>
+
+	<p>The default math delimiters are <code class="command">$$...$$</code> and <code class="command">\[...\]</code> for displayed mathematics, and <code class="command">\(...\)</code> for inline mathematics. Details on LaTeX markdown can be found <a href="https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols" target="_blank">online</a> (opens in a new window)</p>
+
+	<p>The following HTML options are available to make the mathmatics look nice. For inline mathematics:</p>
+
+	<div class="code-block">
+		<code>&lt<span class="comment">span</span> <span class="builtin">class</span>=<span class="string">"maths"</span>&gt&lt/<span class="comment">span</span>&gt</code>
+	</div>
+
+	<p>For displayed mathematics:</p>
+	<div class="code-block">
+		<pre><code>&lt<span class="function">div</span> <span class="builtin">class</span>=<span class="string">"maths"</span>&gt
+    		$$ maths $$
+		&lt/<span class="comment">div</span>&gt</code></pre>
+	</div>
 </div>
 
 <script>

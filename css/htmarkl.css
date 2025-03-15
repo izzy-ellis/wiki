@@ -48,3 +48,16 @@ div.content th, div.content td {
 	border-style: solid;
 	padding: 5px;
 }
+
+span.maths {
+	background-color: #baf0f2;
+	padding: 2px;
+	border-radius: 2px;
+}
+
+div.maths {
+	background-color: #baf0f2;
+	padding: 2px;
+	border-radius: 2px;
+	overflow: auto;
+}
