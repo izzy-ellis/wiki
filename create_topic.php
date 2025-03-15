@@ -12,7 +12,6 @@
 		</div> <?php
 	}
 
-	add_header("Create page", ['tooltip.css', 'htmarkl.css', 'tabs.css'], ['tabs.js']);
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
@@ -33,7 +32,7 @@
 				<label for="title">
 					Title: <?= add_tooltip("This is the title of the page") ?>
 				</label><br>
-				<input type="text"  id="title" name="title"><br>
+				<input type="text"  id="title" name="title" style="width: 50%;"><br>
 
 				<!-- Abbreviation -->
 				<label for="abbreviation">
@@ -44,7 +43,7 @@
 				<label for="description">
 					Description: <?= add_tooltip("A description of the page") ?>
 				</label><br>
-				<input type="text" id="description" name="description"><br>
+				<input type="text" id="description" name="description" style="width: 90%;"><br>
 
 				<!-- Drop down menu for the categories -->
 				<!-- These datalists work on the basis that additions can be made
@@ -52,7 +51,7 @@
 				<label for="category">
 					Category: <?= add_tooltip("The category of the page") ?>
 				</label><br>
-				<input list="category" name="category">
+				<input list="category" name="category" id="category_input">
 					<datalist id="category">
 						<?php 
 						$sql = "SELECT DISTINCT name FROM category";	// Get the distinct categories
@@ -69,7 +68,7 @@
 				<label for="sub_category">
 					Sub-category: <?= add_tooltip("The sub-category of the page") ?>
 				</label><br>
-				<input list="sub_category" name="sub_category">
+				<input list="sub_category" name="sub_category" onclick="filterSubCategories(event)">
 					<datalist id="sub_category">
 						<!-- Get the available sub-categories and slap them here -->
 						<?php 
@@ -78,7 +77,7 @@
 						foreach($sub_categories as $sub_category) {
 							// This is by no means optimal, but it will do the job for now
 							?> 
-							<option value="/<?= $sub_category['category_name'] ?>/<?= $sub_category['sub_category_name'] ?>"><?= $sub_category['category_name'] . "/" . $sub_category['sub_category_name'] ?></option> <?php
+							<option value="<?= $sub_category['sub_category_name'] ?>" id="<?= $sub_category['category_name'] . "/" . $sub_category['sub_category_name'] ?>" class="sub-cat-option" data-parent="<?= $sub_category['category_name']?>"></option><?= $sub_category['sub_category_name'] ?></option> <?php
 						}
 						?> 
 					</datalist><br>
@@ -89,13 +88,13 @@
 				<label for="keywords">
 					Keywords: <?= add_tooltip("A list of comma separated keywords") ?>
 				</label><br>
-				<input type="text" id="keywords" name="keywords"><br>
+				<input type="text" id="keywords" name="keywords" style="width: 90%"><br>
 
 				<!-- Big old text area for the text to go -->
 				<label for="text">
 					Text: <?= add_tooltip("The main body of Markdown for the page") ?>
 				</label><br>
-				<textarea id=text name="text"></textarea><br>
+				<textarea id=text name="text" style="width: 90%; height: 50%;"></textarea><br>
 
 				<!-- Submit button -->
 				<input type="submit">

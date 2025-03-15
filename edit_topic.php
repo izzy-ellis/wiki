@@ -25,7 +25,7 @@
 	$sql = "SELECT title, abbreviation, keywords, pages.id AS id, file_name, category.name AS category, sub_category.name AS sub_category FROM pages JOIN category ON category.id = pages.category_id JOIN sub_category ON sub_category.id = pages.sub_category_id WHERE abbreviation = '$topic'";
 	$page_info = pdo($pdo, $sql)->fetch();
 
-	add_header("Edit Topic", ['tooltip.css', 'htmarkl.css']);
+	add_header("Edit Topic", ['tooltip.css', 'htmarkl.css', 'tabs.css'], ['tabs.js']);
 ?>
 
 	
@@ -37,11 +37,11 @@
 			<!-- The full title of the page -->
 			<!-- CSS tooltip on W3 -->
 			<label for="title">Title:</label><br>
-			<input type="text"  id="title" name="title" value="<?= $page_info['title'] ?>" readonly><br>
+			<input type="text"  id="title" name="title" value="<?= $page_info['title'] ?>" readonly style="width: 50%"><br>
 
 			<!-- Adding the ability to update keywords -->
 			<label for="keywords">Keywords:</label><br>
-			<input type="text" id="keywords" name="keywords" value="<?= $page_info['keywords'] ?>"><br>
+			<input type="text" id="keywords" name="keywords" value="<?= $page_info['keywords'] ?>" style="width: 90%"><br>
 
 			<!-- This is apparently an insecure way to pass ID --> 
 			<input type="hidden" id="id" name="id" value="<?= $page_info['id'] ?>">
@@ -58,7 +58,7 @@
 
 			<!-- Big old text area for the text to go -->
 			<label for="text">Text:</label><br>
-			<textarea id=text name="text"><?php 
+			<textarea id=text name="text" style="width: 90%; height: 70%"><?php 
 			$file_path = "pages/" . $page_info['category'] . "/" . $page_info['sub_category'] . "/" . $page_info['file_name'];
 			$file = fopen($file_path, 'r') or die("OH BALLS");
 			echo fread($file, filesize($file_path));
