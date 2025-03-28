@@ -58,6 +58,6 @@ span.maths {
 div.maths {
 	background-color: #d3f1f2;
 	padding: 2px;
-	border-radius: 2px;
+	border-radius: 2px 2px 7px 2px;
 	overflow: auto;
 }
