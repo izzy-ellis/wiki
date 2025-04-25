@@ -4,7 +4,7 @@
 function display_page($page) {
 	// The page argument should have values for title, abbreviation, description, category, and sub_category
 	?> 
-	<div id="<?= $page['abbreviation'] ?>" style="border-style: solid; border-width: 2px; padding: 5px; margin-bottom: 2px;" class="column-half">
+	<div id="<?= $page['abbreviation'] ?>" style="border-style: solid; border-width: 2px; padding: 5px; margin-bottom: 2px; border-color: gray;" class="column-half">
 		<h3 style="display: inline"><a href="topic.php?topic=<?= $page['abbreviation'] ?>"><?= $page['title'] ?> (<?= $page['abbreviation'] ?>)</a></h3>
 		<p style="display: inline"><code><?= $page['category'] . "/" . $page['sub_category'] ?></code></p>
 		<p><?= $page['description'] ?></p>
