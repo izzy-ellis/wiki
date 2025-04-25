@@ -11,7 +11,7 @@
 		echo "OH SHIT";
 	}
 
-	$sql = "SELECT pages.title, pages.abbreviation, pages.description, category.name AS category, sub_category.name AS sub_category FROM pages JOIN category ON pages.category_id = category.id JOIN sub_category ON pages.sub_category_id = sub_category.id WHERE pages.sub_category_id = $sub_category_id;";
+	$sql = "SELECT pages.title, pages.abbreviation, pages.description, category.name AS category, sub_category.name AS sub_category FROM pages JOIN category ON pages.category_id = category.id JOIN sub_category ON pages.sub_category_id = sub_category.id WHERE pages.sub_category_id = $sub_category_id ORDER BY pages.title ASC;";
 
 	$topics = pdo($pdo, $sql)->fetchAll();
 
@@ -20,9 +20,8 @@
 ?>
 	<div class="column-full">
 		<h1>Sub-category: <?= $topics[0]['sub_category'] ?></h1>
-		<ul>
 		<?php
 		foreach ($topics as $topic) {
-			?> <li> <?= display_page($topic); ?> </li> <?php
+			?>  <?= display_page($topic); ?> <?php
 		} ?>
 	</div>

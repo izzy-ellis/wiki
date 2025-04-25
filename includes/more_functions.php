@@ -3,8 +3,12 @@
 
 function display_page($page) {
 	// The page argument should have values for title, abbreviation, description, category, and sub_category
-	?> <a href="topic.php?topic=<?= $page['abbreviation'] ?>"><?= strtoupper($page['abbreviation']) . " - " . $page['title'] ?>
-	</a>
+	?> 
+	<div id="<?= $page['abbreviation'] ?>" style="border-style: solid; border-width: 2px; padding: 5px; margin-bottom: 2px;" class="column-half">
+		<h3 style="display: inline"><a href="topic.php?topic=<?= $page['abbreviation'] ?>"><?= $page['title'] ?> (<?= $page['abbreviation'] ?>)</a></h3>
+		<p style="display: inline"><code><?= $page['category'] . "/" . $page['sub_category'] ?></code></p>
+		<p><?= $page['description'] ?></p>
+	</div>
 <?php }
 
 function display_search_results($array_of_arrays) {
@@ -12,14 +16,14 @@ function display_search_results($array_of_arrays) {
 	// As well as the values needed for display_page(), it also needs page IDs
 
 	$displayed_pages = [];
-	?> <ul> <?php 
+	?>  <?php 
 	foreach ($array_of_arrays as $list_of_results) {
 		foreach ($list_of_results as $result) {
 			if (!in_array($result['id'], $displayed_pages)) {
 				// If the page has not been displayed already
-				?> <li> <?php
+				?> <?php
 				display_page($result);
-				$displayed_pages[] = $result['id']; ?> </li> <?php
+				$displayed_pages[] = $result['id']; ?>  <?php
 			}
 		}
 	}
