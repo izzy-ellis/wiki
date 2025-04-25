@@ -9,6 +9,13 @@
 ?>
 
 	<div id="content" class="column-full">
+		<div id="page-count" class="column-full" style="border-style: solid; border-width: 3px; border-color: red">
+			<?php
+			$page_count_sql = "SELECT COUNT(id) FROM pages";
+			$page_count = pdo($pdo, $page_count_sql)->fetch();
+			?>
+			<h1 id="count" style="padding-left: 30px">Total pages: <?= $page_count['COUNT(id)'] ?></h1>
+		</div>
 		<div id="side-nav-bar" class="column-full">
 			<!-- Here we are going to list all the categories and their sub-categories -->
 			<?php
